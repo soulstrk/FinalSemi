@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+
+body {
+  padding-top: 0px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.d-block{
+	width: 100%;
+}
+
+.s_img{
+	width: 100%;
+	height: 700px;;
+}
+
+.card-img-top{
+	width: 310px;
+	height: 350px;
+}
+
+.card-footer img{
+	width: 20px;
+	height: 20px;
+	float: right;
+}
+.card-footer a{
+	font-family: 'Jeju Gothic', serif;
+	text-decoration: none;
+	color: blue;
+}
+
+#conRow{
+	padding: 20px;
+	padding-top: 30px;
+}
+
+
+.coco{
+	width: 100%;
+	height: 100%;
+}
+h4 a{
+	color:#3a3e3f; font-size: 25px;
+}
+
+h4 img{
+	width: 20px; height: 20px; float: right;
+}
+.col-lg-12 h1{
+	text-align: center; padding-top: 20px;
+}
+
+#mainImg {
+  margin: 0;
+  font: bold 26px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #000000;
+  text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+  -webkit-transition: .2s all linear;
+  letter-spacing:-2px;
+  text-align: center;
+}
+#mainImg:hover {
+  cursor: text;
+}
+#mainImg:focus {
+  outline: none;
+}
+
+.best {
+    width: 75px;
+    height: 38px;
+    line-height: 38px;
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    z-index: 11;
+    background-color: rgb(25, 30, 33);
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    text-align: center;
+    display: none;
+    font-family: 'Nanum Myeongjo', serif;
+    letter-spacing: -0.5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(25, 30, 33);
+    border-image: initial;
+    transition: all 0.3s linear 0s;
+}
+
+.card-footer ul {
+	list-style: none;
+    width: 290px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    display: inline-block;
+    padding: 10px 0px 20px;
+}
+
+.col .card {
+    box-shadow: 0px 15px 35px rgba(50,50,90,0.1), 0px 5px 15px rgba(0,0,0,0.07);
+    box-sizing: border-box;
+	transition: .2s ease-in-out;
+	margin: 0 13px;
+	font-family: "Nanum Gothic", dotum, Arial, sans-serif;
+}
+
+#goodsTitle  {
+    margin: 15px auto;
+    font-weight: normal;
+    font-size: 24px;
+    color: #222;
+    width: 90%;
+}
+
+#subname {
+    margin: 7px auto 10px;
+    font-weight: normal;
+    font-size: 11px;
+    color: #999;
+    width: 90%;
+    letter-spacing: -0.5px;
+    line-height: 18px;
+}
+#customer {
+    margin-top: 10px;
+    color: #999;
+    font-size: 17px;
+    text-decoration: line-through;
+    letter-spacing: -0.5px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#price {
+    margin-top: 0;
+    font-weight: bold;
+    color: #222;
+    font-size: 17px;
+    letter-spacing: -0.5px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#best10{
+	font-family: 'Roboto Condensed','Nanum Gothic',sans-serif;
+	font-weight: 700;
+    letter-spacing: 5px;
+    height: 100px;
+    line-height: 100px;
+    padding: 20px 0px;
+    text-align: center;	
+}
+
+#goodsRow{
+	background-color: #f7f7f7
+}
+
+.card-footer li img{
+	vertical-align: middle;
+	width: 80px;
+	height: 23px;
+	float: left;
+}
+
+
+
+
+
+
+
+

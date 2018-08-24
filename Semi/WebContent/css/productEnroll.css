@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.input-group-text{
+	width: 200px;
+	padding-left: 67px;
+	font-family: 'Jeju Myeongjo', serif;
+	font-weight: bold;
+}
+
+.dc{
+	font-family: 'Jeju Myeongjo', serif;
+	font-weight: bold;
+}
+
+#ppp{
+	font-family: 'Jeju Myeongjo', serif;
+	font-weight: bold;
+	font-size: 79px;
+	padding-top: 50px;
+	color:black;
+}

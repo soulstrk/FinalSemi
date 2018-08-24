@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.e1{
+	display: none;
+}
+
+.orderHistory span{
+	font-size: 50px;
+	font-weight: bold;
+	font-family: 'Nanum Myeongjo', serif;
+}
+
+#seeGraph{
+	font-size: 50px;
+	color: #000080;
+	font-family: 'Nanum Myeongjo', serif;
+	text-decoration: none;
+}
+
+#productManagement table tr th{
+	font-size: 30px;
+	font-family: 'Jeju Myeongjo', serif;
+	color: #27a2b5;
+}
+
+#productManagement table tr td{
+.col-md-12 span{
+	font-size: 50px;
+	font-weight: bold;
+	font-family: 'Nanum Myeongjo', serif;
+}
+
+
+.btn1,.btn2{
+	width: 50px;
+	height: 50px;
+}

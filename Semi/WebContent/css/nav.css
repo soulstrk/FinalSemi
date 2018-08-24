@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+nav{
+	font-family: 'Nanum Myeongjo', serif;
+}
+
+.dropdown-menu a{
+	font-size: 39px;
+}
+.dropdown-menu li{
+	width: 300px;	
+	text-align: center;
+}
+
+.nav-link b{
+	padding-left: 1rem;
+	font-size: 25px;
+	color:black;
+}
+
+.navbar-brand b{
+	font-family:sans-serif;
+	font-size: 45px;
+	color: #a996e1;
+	font-weight: bold;
+	padding-left: 260px;
+	text-shadow: -2px 0 #121c1c, 0 2px #610ca0, 2px 0 #200c72, 0 -2px #1fed3c;
+}
+
+.join_image{
+	width: 25px;
+	height: 25px;
+	display: none;
+	position: relative;
+	left: 530px;
+	bottom: 30px;
+}
+
+input[type=password]{
+	font-family: monospace;
+}
+
+.dropdown-item{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#myPage{
+	float: right;
+    position: relative;
+    left: 680px;
+}
+
+/* .waterPaint {
+  width: 70vw;
+  height: 150vh;
+
+  position:absolute;
+  top :0;
+  left : 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas-stitch {
+  display: none;
+} */

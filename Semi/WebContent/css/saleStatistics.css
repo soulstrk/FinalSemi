@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+#sTable th:nth-child(1),#sTable th:nth-child(3){
+	width: 170px;
+}
+#sTable th:nth-child(2){
+	width: 220px;
+
+#sTable th:nth-child(4){
+	text-align: center;
+}
+
+#sTable th{
+	font-size: 26px;
+	height: 50px;
+	text-align: center;
+	font-family: 'Jeju Myeongjo', serif;
+}
+
+#mTable td{
+	font-size: 22px;
+	padding-left:50px;
+	padding-top:18px;
+	height: 70px;
+	font-weight:bold;
+	font-family: 'Jeju Myeongjo', serif;
+}
+#yearSel,#monthSel{
+	width: 120px;
+	height: 50px;
+}
+

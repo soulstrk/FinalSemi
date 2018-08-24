@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#myTable tr th a{ 
+	color: #160bf4;
+}
+
+#myTable tr td{ 
+	font-weight: bold;
+	font-size: 15px;
+}
+
+#myTable{
+	margin-top: 30px;
+}
