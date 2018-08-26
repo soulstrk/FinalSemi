@@ -12,8 +12,8 @@ public class DBConnection {
 		Connection conn=null;
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
-			String url="jdbc:oracle:thin:@localhost:1521:orcl";
-			conn=DriverManager.getConnection(url, "yong","admin");
+			String url="jdbc:oracle:thin:@localhost:1521:xe"; //orcl-> xe
+			conn=DriverManager.getConnection(url, "scott","tiger");
 		}catch(ClassNotFoundException ce) {
 			System.out.println(ce.getMessage());
 		}catch(SQLException se) {
@@ -39,6 +39,7 @@ public class DBConnection {
 			System.out.println(se.getMessage());
 		}
 	}
+	
 	public static void closeConn(ResultSet rs) {
 		try {
 			if(rs!=null) rs.close();
@@ -60,6 +61,10 @@ public class DBConnection {
 			System.out.println(se.getMessage());
 		}
 	}
+	
+	
+	
+	
 }
 
 

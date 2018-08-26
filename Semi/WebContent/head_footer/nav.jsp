@@ -29,7 +29,7 @@
         <a class="nav-link active" href="index.jsp?content1=join.jsp"><b>Join</b></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="javascript:alert('미구현')"><b>Cart</b></a>
+        <a class="nav-link" href="cart.do?cmd=cart&id=<%=id%>"><b>Cart</b></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link active" href="customerboard.do?cmd=list"><b>FAQ</b></a>
@@ -110,7 +110,7 @@
 	            </div>
 	            <div class="form-group">
 	              <button class="btn btn-info btn-lg btn-block">로그인</button>
-	              <span><a href="index.jsp?content1=join.jsp">회원가입</a></span><span style="float: right;"><a href="#" id="findInfo">아이디/비밀번호 찾기</a></span>
+	              <span><a href="index.jsp?content1=join.jsp">회원가입</a></span><span style="float: right;"><a href="findinfo.do?cmd=findinfo" id="findInfo">아이디/비밀번호 찾기</a></span>
 	            </div>
 	          </form>
 	      </div>

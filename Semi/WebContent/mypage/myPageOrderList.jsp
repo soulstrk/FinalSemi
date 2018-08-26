@@ -29,6 +29,37 @@
 			</c:forEach> 
 			</table>
 			
+			<!-- 페이징처리 -->
+			<c:choose>
+				<c:when test="${startPage > 10 }">
+					<a href="mypage.do?cmd=orderlist&pageNum=${ startPage-1 }&id=<%=id%>"> << </a>
+				</c:when>
+				<c:otherwise>
+					<<
+				</c:otherwise>
+			</c:choose>		
+			
+			<c:forEach var="i" begin="${startPage }" end="${endPage }">
+				<c:choose>
+					<c:when test="${i==pageNum}">
+						<a href="mypage.do?cmd=orderlist&pageNum=${ i}&id=<%=id%>"> <span style="color:black;">[${i }]</span> </a>
+					</c:when>				
+					<c:otherwise>
+						<a href="mypage.do?cmd=orderlist&pageNum=${ i}&id=<%=id%>"> <span style="color:gray;">[${i }]</span> </a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<c:choose>
+				<c:when test="${endPage < pageCount }">
+					<a href="mypage.do?cmd=orderlist&pageNum=${ endPage+1 }&id=<%=id%>"> >> </a>
+				</c:when>
+				<c:otherwise>
+					>>
+				</c:otherwise>
+			</c:choose>		
+			
+			
 		</div>
 		<div class="col-md-2"></div>
 	</div>

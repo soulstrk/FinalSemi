@@ -98,7 +98,7 @@ public class MyPageDao {
 		}
 	}
 
-	// 회원탈퇴 --관리자번호 -1로 바꾸기
+	// 회원탈퇴 --> 관리자번호 -1로 바꾸기
 	public int delete(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -132,15 +132,26 @@ public class MyPageDao {
 	// --------------------------------------------------------------------------------
 
 	// 마이페이지 회원 주문전체내역 불러오기
-	public ArrayList<OrderVo> getOrderList(String id) {
+	public ArrayList<OrderVo> getOrderList(String id, int startRow, int endRow) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBConnection.getConn();
-			String sql = "select * from order_table where o_id=? order by o_num desc";
+			String sql="";
+			if(startRow==0 && endRow==0) {
+				sql="select * from order_table where o_id=? order by o_num desc";
+			}else {
+				sql = "select * from(select aa.*, rownum rnum from("+
+						"select * from order_table where o_id=? order by o_num desc)aa ) "+
+						"where rnum >=? and rnum <=?";
+			}
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			if(!(startRow==0 && endRow==0)) {
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			}
 			rs = pstmt.executeQuery();
 			ArrayList<OrderVo> list = new ArrayList<OrderVo>();
 			while (rs.next()) {
@@ -369,14 +380,19 @@ public class MyPageDao {
 		}
 	}
 	
-	//마이페이지 고객센터 회원 게시물 총 수량 구하기
-	public int getMyPageCount(String id){
+	//마이페이지 회원 게시물 총 수량 구하기(주문, faq, point)
+	public int getMyPageCount(String id, String page){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=DBConnection.getConn();
-			String sql="select NVL(count(b_num),0) count from customer_board where b_id=?";
+			String sql="";
+			if(page.equals("orderList")) { //주문
+				sql="select NVL(count(o_num),0) count from order_table where o_id=?";
+			}else if(page.equals("faqList")){ //고객센터 게시물
+				sql="select NVL(count(b_num),0) count from customer_board where b_id=?";
+			}
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
@@ -384,6 +400,7 @@ public class MyPageDao {
 			if(rs.next()) {
 				n=rs.getInt("count");
 			}
+			System.out.println(n+"!!!");
 			return n;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());

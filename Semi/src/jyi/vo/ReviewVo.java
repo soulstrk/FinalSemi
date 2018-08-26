@@ -1,10 +1,11 @@
 package jyi.vo;
 
 public class ReviewVo {
-	  private int adminOk;
-	  private int product_num;    
-	  private String id;            
-	  private String content;
+	  private int adminOk; //글번호
+	  private int product_num; //상품번호    
+	  private String id; //아이디           
+	  private String content; //상품후기내용
+	  
 	public ReviewVo() {
 		super();
 	}

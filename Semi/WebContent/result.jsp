@@ -29,7 +29,12 @@
 				location.href="mypage.do?cmd=review&id=<%=id%>"; 
 			</script>
 		<%  
-			
+		}else if(resultMsg.equals("오류로 인해 삭제에 실패했습니다.") || resultMsg.equals("오류로 인해 수량변경에 실패했습니다.")){
+			%>
+			<script>
+				location.href="cart.do?cmd=cart&id=<%=id%>"; 
+			</script>
+		<%  
 		}else{
 			%>
 			<script>
