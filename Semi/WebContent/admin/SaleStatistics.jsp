@@ -5,7 +5,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<head>
+<link href="css/saleStatistics.css?ver=6" rel="stylesheet">
+</head>
 <div class="container-fluid" style="padding-top: 150px;">
 	<div class="row">
 		<div class="col-md-12 orderHistory" style="text-align: center;"><span>Sales Statistic</span></div>
@@ -13,7 +15,7 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-10">
-		<form action="../adminProduct.do?adminNum=2" method="post">
+		<form action="adminProduct.do?adminNum=2" method="post">
 			<select name="yearSel" id="yearSel" onchange="monthSel()">
 				<option value="18" selected="selected">2018</option>
 				<option value="17">2017</option>
@@ -33,7 +35,7 @@
 				<option value="11">11월</option>
 				<option value="12">12월</option>
 			</select>
-			<button type="submit" id="staticBtn"><img src="../images/graph.png" alt="" /></button>
+			<button type="submit" id="staticBtn"><img src="images/graph.png" alt="" /></button>
 			</form>
 		</div>
 		<div class="col-md-2"></div>

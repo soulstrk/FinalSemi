@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="css/memberManagement.css?ver=1" rel="stylesheet">
+
 <c:if test="${num eq 1 }"> <!--  attr('href','admin.do?col=gender&adminNum=2&num=2'); -->
 <script type="text/javascript">
 	alert('gdgd');
@@ -107,7 +109,6 @@ function deleteMember(id) {
 		})
 	}
 	
-	setTimeout(function() { location.href="admin.do/adminNum=1" }, 1000);
 }
 </script>
 	

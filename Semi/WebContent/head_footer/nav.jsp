@@ -29,7 +29,7 @@
         <a class="nav-link active" href="index.jsp?content1=join.jsp"><b>Join</b></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="javascript:alert('미구현')"><b>Cart</b></a>
+        <a class="nav-link" href="index.jsp?content1=Cart.jsp"><b>Cart</b></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link active" href="customerboard.do?cmd=list"><b>FAQ</b></a>
@@ -59,12 +59,13 @@
 			    <a class="dropdown-item" href="adminProduct.do?adminNum=1">주문/매출 통계</a>
 			    <a class="dropdown-item" href="admin.do?adminNum=1&num=0">회원관리</a>
 			    <a class="dropdown-item" href="index.jsp?content1=admin/productEnroll.jsp">상품등록</a>
+			    <a class="dropdown-item" href="adminProduct.do?adminNum=3&pageNum=1">상품관리</a>
 			  </div>
 			</div>
 			<script type="text/javascript">
 				$(document).ready(function() {
 					 $('#searchForm').css('left','655px'); 
-					 $('img[src="images/logo_on.png"]').css('left','170px'); 
+					 $('img[src="images/hd_logo.png"]').css('left','150px'); 
 					 $('#myPage').css('left','580px');
 				})
 			</script>
@@ -75,14 +76,14 @@
 		<% }} %>
       </li>
       <li class="nav-item active">
-        <a class="navbar-brand" href="index.jsp?content1=mainPage.jsp"><img src="images/logo_on.png" style="width: 215px; height: 110px; position: relative; left: 280px; padding-bottom: 30px;"></a>
+        <a class="navbar-brand" href="index.jsp?content1=mainPage.jsp"><img src="images/hd_logo.png" style="width: 223px; height: 45px; position: relative; left: 250px; padding-bottom: 0px;"></a>
       </li>
       <li class="nav-item active" id="myPage">
         <a class="nav-link" href="mypage.do?cmd=info&id=<%=id%>&info=mypage"><b>My page</b></a>
       </li>
       <li class="nav-item active">
-        <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 755px;" method="get" action="#">
-	      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 755px;" method="post" action="search.do?pageNum=1">
+	      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
 	      <button class="btn" type="submit"><img src="images/magnifier.png"></button>
 	    </form>
       </li>

@@ -20,9 +20,12 @@ public class MainListController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MainListDao dao = new MainListDao();
 		ArrayList<ProductVo> list = new ArrayList<>();
+		ArrayList<ProductVo> saleList = new ArrayList<>();
 		list = dao.getBestProducts();
+		saleList = dao.getSaleList();
 		
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("index.jsp?content1=mainPage.jsp").forward(request, response);;
+		request.setAttribute("saleList", saleList);
+		request.getRequestDispatcher("index.jsp?content1=mainPage.jsp").forward(request, response);
 	}
 }

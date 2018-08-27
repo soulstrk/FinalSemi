@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="css/productManagement.css?ver=4" rel="stylesheet">
     
 <div class="container-fluid" style="padding-top: 150px;">
 	<div class="row">
