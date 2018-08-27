@@ -1,10 +1,10 @@
 package jyi.vo;
 
 public class OrderPointVo {
-	 private int num;        
-	 private int o_num;         
-	 private int plus_point;     
-	 private int minus_point;
+	 private int num; //인덱스번호       
+	 private int o_num; //주문번호        
+	 private int plus_point; //쌓인적립금    
+	 private int minus_point; //사용한적립금
 	public OrderPointVo() {
 		super();
 	}

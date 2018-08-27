@@ -3,17 +3,18 @@ package jyi.vo;
 import java.sql.Date;
 
 public class OrderVo {
-	  private int o_num;
-	  private String o_id;
-	  private Date o_date;
-	  private String o_addr;
-	  private String o_paymethod;
-	  private int o_deliverynum;
-	  private String o_phone;
-	  private String o_msg;
-	  private int o_payment;
-	  private int o_state;
-	  private int o_amount;
+	  private int o_num; //주문번호
+	  private String o_id; //아이디
+	  private Date o_date; //주문일자
+	  private String o_addr; //배송지주소
+	  private String o_paymethod; //결제방법
+	  private int o_deliverynum; // 배송번호
+	  private String o_phone; //수령인번호
+	  private String o_msg; //기타사항
+	  private int o_payment; //결제금액
+	  private int o_state; //주문상태
+	  private int o_amount; //총수량
+	  
 	public OrderVo() {
 		super();
 	}

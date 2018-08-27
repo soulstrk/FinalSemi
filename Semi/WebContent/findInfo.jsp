@@ -1,49 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<title>아이디/비밀번호 찾기</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>아이디/비밀번호 찾기</title>
+<!-- 폼: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_form_basic&stacked=h 
+	 탭: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_tab&stacked=h -->
 <div class="container">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<h2>아이디 찾기</h2>
-			
-				<div class="tab">
-					<button class="tablinks" onclick="openCity(event, 'London')">아이디찾기</button>
-					<button class="tablinks" onclick="openCity(event, 'Paris')">비밀번호찾기</button>
-				</div>
-				<div id="ID" class="tabcontent">
-					<h3>아이디 찾기</h3>
-					<form action="findinfo.do?cmd=findinfoOk&find=id" method="post">
-					
-					
-					
-					</form>
-				</div>
-				<div id="PWD" class="tabcontent">
-					<h3>비밀번호 찾기</h3>
-					<form action="findinfo.do?cmd=findinfoOk&find=pwd" method="post">
-					
-					</form>
-				</div>
+			<h2>아이디/비밀번호 찾기</h2>
+				 <ul class="nav nav-tabs">
+				    <li class="active"><a data-toggle="tab" href="#home">아이디</a></li>
+				    <li><a data-toggle="tab" href="#menu1">비밀번호</a></li>
+				  </ul>
+				<div class="tab-content">
+				<div id="home" class="tab-pane fade in active">
+				<form action="#" method="post">
+     				<div class="form-group">
+				      <label for="id">Name:</label>
+				      <input type="text" class="form-control" id="id" placeholder="Enter name" name="name" style="width:400px;">
+				    </div>
+					<div class="form-group">
+					  <label for="question">Question:</label>
+					  <select name="q_num" class="form-control" id="q_num" style="width:400px;">
+					       	<option value="" selected>질문선택</option>
+					       	<option value="1">당신의 고향은 어디입니까?</option>
+					       	<option value="2">당신의 초등학교 이름은?</option>
+					       	<option value="3">당신의 키는 몇입니까?</option>
+					       	<option value="4">당신의 취미는 무엇입니까?</option>
+					       	<option value="5">당신의 성격은 어떻습니까?</option>
+					</select>
+					</div>
+					<div class="form-group">
+					  <label for="answer">Answer:</label>
+					  <input type="text" class="form-control" id="answer" placeholder="Enter answer" name="answer" style="width:400px;">
+					</div>
+				   	 <button type="submit" class="btn btn-default">Submit</button>
+				  </form>
+    				</div>
+				<div id="menu1" class="tab-pane fade">
+			      <form action="#" method="post">
+				  <div id="home" class="tab-pane fade in active">
+     				<div class="form-group">
+				      <label for="id">ID:</label>
+				      <input type="text" class="form-control" id="id" placeholder="Enter id" name="id" style="width:400px;">
+				    </div>
+					<div class="form-group">
+					  <label for="question">Question:</label>
+					  <select name="q_num" class="form-control" id="q_num" style="width:400px;">
+					       	<option value="" selected>질문선택</option>
+					       	<option value="1">당신의 고향은 어디입니까?</option>
+					       	<option value="2">당신의 초등학교 이름은?</option>
+					       	<option value="3">당신의 키는 몇입니까?</option>
+					       	<option value="4">당신의 취미는 무엇입니까?</option>
+					       	<option value="5">당신의 성격은 어떻습니까?</option>
+					</select>
+					</div>
+					<div class="form-group">
+					  <label for="answer">Answer:</label>
+					  <input type="text" class="form-control" id="answer" placeholder="Enter answer" name="answer" style="width:400px;">
+					</div>
+				   	 <button type="submit" class="btn btn-default">Submit</button>
+				    </div>
+				  </form> </div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
 </div>
-<script>
-	function openCity(evt, cityName) {
-		var i, tabcontent, tablinks;
-		tabcontent = document.getElementsByClassName("tabcontent");
-		for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
-		}
-		tablinks = document.getElementsByClassName("tablinks");
-		for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className
-					.replace(" active", "");
-		}
-		document.getElementById(cityName).style.display = "block";
-		evt.currentTarget.className += " active";
-	}
-</script>
+</div>

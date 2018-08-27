@@ -3,15 +3,15 @@ package jyi.vo;
 import java.sql.Date;
 
 public class CustomerBoardVo {
-	private int b_num;
-	private String b_id;
-	private Date b_date;
-	private String b_content;
-	private int b_ref;
-	private String b_title;
-	private int b_is;
-	private int b_public_private;
-	private int b_result;
+	private int b_num; //메모번호
+	private String b_id; //아이디
+	private Date b_date; //게시날짜
+	private String b_content; //내용
+	private int b_ref; //그룹번호
+	private String b_title; //제목
+	private int b_is; //댓글구분
+	private int b_public_private; //비밀글여부
+	private int b_result; //답변여부
 	
 	public CustomerBoardVo() {
 		super();

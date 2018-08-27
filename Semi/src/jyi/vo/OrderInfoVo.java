@@ -1,11 +1,11 @@
 package jyi.vo;
 
 public class OrderInfoVo {
-	private int oi_idxnum;     
-	private int oi_num;     
-	private int oi_p_num;     
-	private int oi_price;    
-	private int oi_amount;
+	private int oi_idxnum; //인덱스번호     
+	private int oi_num; //주문번호    
+	private int oi_p_num; //상품번호    
+	private int oi_price; //상품가격   
+	private int oi_amount; //수량
 	public OrderInfoVo() {
 		super();
 	}

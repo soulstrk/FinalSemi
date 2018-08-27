@@ -1,17 +1,17 @@
 package jyi.vo;
 
 public class ProductsVo {
-	private int p_num;
-	private String p_name;
-	private int p_price;
-	private int p_stock;
-	private String p_kind;
-	private int p_discountOk;
-	private String p_artist;
-	private String p_explain;
-	private int p_best;
-	private String p_image;
-	private int p_discount_rate;
+	private int p_num; //상품번호
+	private String p_name; //상품이름
+	private int p_price; //상품가격
+	private int p_stock; //상품재고
+	private String p_kind; //상품종류
+	private int p_discountOk; //할인여부
+	private String p_artist; //작가
+	private String p_explain; //상품설명
+	private int p_best; //best작품여부
+	private String p_image; //상품이미지
+	private int p_discount_rate; //할인율
 	
 	public ProductsVo() {
 		super();

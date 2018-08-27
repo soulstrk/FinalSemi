@@ -92,7 +92,7 @@ public class MyPageController extends HttpServlet {
 		String pwd1=request.getParameter("pwd1"); //수정한 비밀번호
 		String post=request.getParameter("postnum");
 		int postnum=0;
-		if(post!=null || !post.equals("")) {
+		if(post!=null) {
 			postnum=Integer.parseInt(post);
 		}
 		String addr1=request.getParameter("addr1");
@@ -138,11 +138,31 @@ public class MyPageController extends HttpServlet {
 	protected void orderList(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
-		
+		String spageNum=request.getParameter("pageNum");
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int startRow=(pageNum-1)*10+1;
+		int endRow=startRow+9;
 		String id=request.getParameter("id");
 		MyPageDao dao=MyPageDao.getInstance();
-		ArrayList<OrderVo> list=dao.getOrderList(id);
+		ArrayList<OrderVo> list=dao.getOrderList(id, startRow, endRow);
+		if(list==null) {
+			request.setAttribute("resultMsg","오류로 인해 해당 정보를 불러들이지 못했습니다..." );
+			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
+		}
+		String page="orderList";
+		int pageCount=(int)Math.ceil(dao.getMyPageCount(id,page)/10.0);
+		int startPage=((pageNum-1)/10*10)+1;
+		int endPage=startPage+9;
+		if(endPage>pageCount) {
+			endPage=pageCount;
+		}
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("index.jsp?content1=mypage/myPageOrderList.jsp").forward(request, response);
 	}
@@ -175,7 +195,9 @@ public class MyPageController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String id=request.getParameter("id");
 		MyPageDao dao=MyPageDao.getInstance();
-		ArrayList<OrderVo> list=dao.getOrderList(id); //회원 주문내역 불러오기
+		int startRow=0;
+		int endRow=0;
+		ArrayList<OrderVo> list=dao.getOrderList(id,startRow,endRow); //회원 주문내역 불러오기
 		ArrayList<OrderPointVo> vo=dao.getPointList(list);//주문별 적립상황 불러오기
 		if(vo==null || list==null) {
 			request.setAttribute("resultMsg", "오류로 인해 해당 정보를 불러들이지 못했습니다...");
@@ -207,10 +229,10 @@ public class MyPageController extends HttpServlet {
 			request.setAttribute("resultMsg", "오류로 인해 해당 정보를 불러들이지 못했습니다...");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
 		}
-		
-		int pageCount=(int)Math.ceil(dao.getMyPageCount(id)/10.0);
+		String page="faqList";
+		int pageCount=(int)Math.ceil(dao.getMyPageCount(id,page)/10.0);
 		int startPage=((pageNum-1)/10*10)+1;
-		int endPage=startPage+10;
+		int endPage=startPage+9;
 		if(endPage > pageCount) {
 			endPage=pageCount;
 		}

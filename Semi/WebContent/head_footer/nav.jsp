@@ -29,7 +29,7 @@
         <a class="nav-link active" href="index.jsp?content1=join.jsp"><b>Join</b></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="index.jsp?content1=Cart.jsp"><b>Cart</b></a>
+        <a class="nav-link" href="cart.do?cmd=cart&id=<%=id%>"><b>Cart</b></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link active" href="customerboard.do?cmd=list"><b>FAQ</b></a>
