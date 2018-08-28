@@ -9,14 +9,16 @@
 <c:if test="${!empty signMsg }"><script>var signMsg = "${signMsg}";alert(signMsg);</script></c:if>
 <c:if test="${!empty sessionScope.loginMsg }"><script>var loginMsg = "${sessionScope.loginMsg}";alert(loginMsg);</script>
 <% session.removeAttribute("loginMsg"); %></c:if> <!-- 수정사항 -->
-<c:if test="${empty list 
-}">
+<c:if test="${empty list}">
 <script type="text/javascript">
 $(document).ready(function() {
 	location.href = "mainList.do"
 })
 </script>
 </c:if>
+<c:if test="${!empty findId }"><script type="text/javascript">
+alert('찾으신 아이디는 : ${findId} 입니다');
+</script></c:if>
 
     <!-- 슬라이드쇼 부분  -->
     <div class="container-fluid">
@@ -76,7 +78,7 @@ $(document).ready(function() {
           	  <div class="col">
                <div class="card" style="width: 310px; margin-bottom: 30px; height: 550px;">
                 <img class="card-img-top" src="pImages/${vo.pImage }" alt="test">
-                  <a class="card-img-overlay" href="#">
+                  <a class="card-img-overlay" href="opainting.do?cmd=detail&p_num=${vo.pNum }">
 				    <span class="best" style="display: block;">Best${status.index+1 }</span>
 				  </a>
 				  <div class="card-footer" style="background-color: white;">
@@ -126,7 +128,7 @@ $(document).ready(function() {
           	  <div class="col">
                <div class="card" style="width: 310px; margin-bottom: 30px; height: 550px;">
                 <a href="#"><img class="card-img-top" src="pImages/${vo.pImage }" alt="test"></a>
-                  <a class="card-img-overlay" href="#">
+                  <a class="card-img-overlay" href="opainting.do?cmd=detail&p_num=${vo.pNum }">
 				    <span class="best" style="display: block;">${vo.pDiscountRate }%</span>
 				  </a>
 				  <div class="card-footer" style="background-color: white;">

@@ -261,4 +261,42 @@ public class AdminProductDao {
 			DBConnection.closeConn(rs, ps, conn);
 		}
 	}
+	
+	//searchWord 용 메소드
+	public ArrayList<ProductVo> searchProduct(String word) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<ProductVo> list = new ArrayList<>();
+		String sql = "select * from products where p_name like ? || '%'";
+		
+		try {
+			conn = DBConnection.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, word);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				int pNum = rs.getInt("p_num");
+				String pName = rs.getString("p_name");
+				int pPrice = rs.getInt("p_price");
+				int pStock = rs.getInt("p_stock");
+				String pKind = rs.getString("p_kind");
+				int pDiscountOk = rs.getInt("p_discountok");
+				String pImage = rs.getString("p_image");
+				String pArtist = rs.getString("p_artist");
+				String pExplain = rs.getString("p_explain");
+				int pBest = rs.getInt("p_best");
+				int pDiscountRate = rs.getInt("p_discount_rate");
+				ProductVo vo = new ProductVo(pNum, pName, pPrice, pStock, pKind, pDiscountOk, pArtist, pExplain, pBest, pImage, pDiscountRate);
+				list.add(vo);
+			}
+			return list;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("searchProduct오류");
+			return null;
+		} finally {
+			DBConnection.closeConn(rs, ps, conn);
+		}
+	}
 }

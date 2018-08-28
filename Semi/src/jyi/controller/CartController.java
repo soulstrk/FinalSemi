@@ -17,6 +17,8 @@ import jyi.dao.CartDao;
 import jyi.vo.CartVo;
 import jyi.vo.ProductsVo;
 import jyi.vo.ViewsVo;
+import ljy.vo.MembersVo;
+import ljy.vo.ProductVo;
 
 @WebServlet("/cart.do")
 public class CartController extends HttpServlet {
@@ -35,6 +37,8 @@ public class CartController extends HttpServlet {
 			delete(request, response);
 		} else if(cmd.equals("update")) {
 			update(request, response);
+		} else if(cmd.equals("insert")) {
+			insert(request, response);
 		} else if(cmd.equals("view")) {
 			view(request, response);
 		} 
@@ -44,7 +48,8 @@ public class CartController extends HttpServlet {
 	// 장바구니 정보 불러오기
 	protected void cart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
+		String id =  (String)session.getAttribute("id");
 		if (id == null || id.equals("null")) {
 			request.setAttribute("resultMsg", "로그인 후 이용가능한 페이지입니다.");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
@@ -129,5 +134,38 @@ public class CartController extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		pw.println(arr.toString());
 		pw.close();
+	}
+	
+	//장바구니에 구매 상품 넣기
+	protected void insert(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String pNum = request.getParameter("c_p_num");
+		String sAmount = request.getParameter("amount");
+		int amount = 0;
+		if(sAmount != null) {
+			amount = Integer.parseInt(sAmount);
+		}
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		CartDao dao = CartDao.getInstance();
+		if(dao.productDupliChk(id, pNum) == -1) {
+			int w = dao.updateAmount(id,pNum,amount);
+			if(w>0) {
+				request.setAttribute("pNum", pNum);
+				request.setAttribute("cartMsg", "success");
+				request.getRequestDispatcher("opainting.do?cmd=detail&p_num="+pNum).forward(request, response);
+			}else {
+				response.sendRedirect("index.jsp?content1=cartOk.jsp");
+			}
+		}else if(dao.productDupliChk(id, pNum) == 1) {
+			int w = dao.insert(id, pNum, amount);
+			if(w>0) {
+				request.setAttribute("pNum", pNum);
+				request.setAttribute("cartMsg", "success");
+				request.getRequestDispatcher("opainting.do?cmd=detail&p_num="+pNum).forward(request, response);
+			}else {
+				response.sendRedirect("index.jsp?content1=cartOk.jsp");
+			}
+		}
 	}
 }

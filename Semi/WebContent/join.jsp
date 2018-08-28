@@ -7,7 +7,6 @@
      <div class="page-header">
        <h1>회원가입</h1>
      </div>
-     
      <div class="col-md-9 col-md-offset-3">
        <form role="form" action="members.do?number=1" method="post" name="form">
          <div class="form-group form-group-custom">
