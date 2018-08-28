@@ -37,6 +37,35 @@
 				</c:choose>
 			</c:forEach> 
 			</table>
+			
+			<c:choose>
+				<c:when test="${startPage > 10 }">
+					<a href="mypage.do?cmd=review&id=<%=id%>&pageNum=${startPage-1}"> << </a>
+				</c:when>
+				<c:otherwise>
+					<<
+				</c:otherwise>
+			</c:choose>
+
+			<c:forEach var="i" begin="${startPage }" end="${endPage }">
+				<c:choose>
+					<c:when test="${pageNum eq i }">
+						<a href="mypage.do?cmd=review&id=<%=id%>&pageNum=${i}"><span style="color:black;">[${i }]</span></a>
+					</c:when>
+					<c:otherwise>
+						<a href="mypage.do?cmd=review&id=<%=id%>&pageNum=${i}"><span style="color:gray;">[${i }]</span></a>					
+					</c:otherwise>			
+				</c:choose>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${endPage < pageCount }">
+					<a href="mypage.do?cmd=review&id=<%=id%>&pageNum=${endPage +1}"> >> </a>
+				</c:when>
+				<c:otherwise>
+					>>
+				</c:otherwise>
+			</c:choose>
+			
 		</div>
 		<div class="col-md-2"></div>
 	</div>

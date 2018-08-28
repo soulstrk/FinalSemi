@@ -1,7 +1,10 @@
 package jyi.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -76,10 +79,35 @@ public class MyPageController extends HttpServlet {
 		if(info.equals("info")) {
 			path="myPageInfo.jsp"; //회원정보 상세보기 페이지로 이동
 		}
-		//최신 주문정보 불러와서 넣기
-		OrderVo ordervo=dao.getLatelyOrder(id);
+		// 주문정보 불러와서 넣기
+		int state0=0; //주문취소
+		int state1=0; //배송준비중
+		int state2=0; //배송중
+		int state3=0; //배송완료
+		int state4=0; //반품신청중
+		int state5=0; //반품승인완료
+		
+		ArrayList<OrderVo> list=dao.getLatelyOrder(id);
+		for(OrderVo ordervo : list) {
+			int n=ordervo.getO_state();
+			System.out.println(n);
+			switch(n) {
+			case -1: state0 = state0 +1; break;
+			case 1: state1 = state1 +1; break;
+			case 2: state2 = state2 +1; break;
+			case 3: state3 = state3 +1; break;
+			case 4: state4 = state4 +1; break;
+			case 5: state5 = state5 +1; break;
+			}
+		}
+		request.setAttribute("id", id);
+		request.setAttribute("state0", state0);	//주문취소
+		request.setAttribute("state1", state1);	//배송준비중
+		request.setAttribute("state2", state2);	//배송중
+		request.setAttribute("state3", state3);	//배송완료
+		request.setAttribute("state4", state4);	//반품신청중
+		request.setAttribute("state5", state5);	//반품승인완료
 		request.setAttribute("vo", vo);	
-		request.setAttribute("ordervo", ordervo);	
 		request.getRequestDispatcher("index.jsp?content1=mypage/"+path).forward(request, response);			
 	}
 	
@@ -138,27 +166,40 @@ public class MyPageController extends HttpServlet {
 	protected void orderList(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String date=request.getParameter("date");
+		if(date==null || date.equals("null")) date="x";
+		Calendar cal=Calendar.getInstance();
+		int month=cal.get(Calendar.MONTH)+1;
+		String startDate="1900/01/01";
+		String z="";
+		if(month<10) z="0";
+		String endDate=String.valueOf(cal.get(Calendar.YEAR))+"-"+z+String.valueOf(month)
+						+"-"+String.valueOf(cal.get(Calendar.DATE));
+		if(date.equals("date")) {
+			startDate=request.getParameter("date1"); // 조회시작일 
+			endDate=request.getParameter("date2"); // 조회마감일
+		}
+		//2018-08-23 --> '18/08/23'
+		String sd=startDate.substring(2, 4)+"/"+startDate.substring(5, 7)+"/"+startDate.substring(8, 10);
+		String ed=endDate.substring(2, 4)+"/"+endDate.substring(5, 7)+"/"+endDate.substring(8, 10);
 		String spageNum=request.getParameter("pageNum");
 		int pageNum=1;
-		if(spageNum!=null) {
-			pageNum=Integer.parseInt(spageNum);
-		}
+		if(spageNum!=null) pageNum=Integer.parseInt(spageNum);
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
 		String id=request.getParameter("id");
 		MyPageDao dao=MyPageDao.getInstance();
-		ArrayList<OrderVo> list=dao.getOrderList(id, startRow, endRow);
+		ArrayList<OrderVo> list=dao.getOrderList(id, startRow, endRow, date, sd, ed);
 		if(list==null) {
 			request.setAttribute("resultMsg","오류로 인해 해당 정보를 불러들이지 못했습니다..." );
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
 		}
 		String page="orderList";
-		int pageCount=(int)Math.ceil(dao.getMyPageCount(id,page)/10.0);
+		int pageCount=(int)Math.ceil(dao.getMyPageCount(id,page,sd,ed)/10.0);
+		if(pageCount==0) pageCount=1;
 		int startPage=((pageNum-1)/10*10)+1;
 		int endPage=startPage+9;
-		if(endPage>pageCount) {
-			endPage=pageCount;
-		}
+		if(endPage>pageCount) endPage=pageCount;
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageNum", pageNum);
@@ -193,16 +234,37 @@ public class MyPageController extends HttpServlet {
 	protected void pointList(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String spageNum=request.getParameter("pageNum");
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int startRow=(pageNum-1)*10+1;
+		int endRow=startRow+9;
+		int startPage=((pageNum-1)/10*10)+1;
+		int endPage=startPage+9;
 		String id=request.getParameter("id");
+		String page="pointList";
+		String date1="";
+		String date2="";
 		MyPageDao dao=MyPageDao.getInstance();
-		int startRow=0;
-		int endRow=0;
-		ArrayList<OrderVo> list=dao.getOrderList(id,startRow,endRow); //회원 주문내역 불러오기
+		int pageCount=(int)Math.ceil(dao.getMyPageCount(id, page,date1,date2)/10.0);
+		if(endPage>pageCount) {
+			endPage=pageCount;
+		}
+		String startDate="1900/01/01";
+		String endDate="1900/01/02";
+		String date="x";
+		ArrayList<OrderVo> list=dao.getOrderList(id,startRow,endRow,date,startDate,endDate); //회원 주문내역 불러오기
 		ArrayList<OrderPointVo> vo=dao.getPointList(list);//주문별 적립상황 불러오기
 		if(vo==null || list==null) {
 			request.setAttribute("resultMsg", "오류로 인해 해당 정보를 불러들이지 못했습니다...");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
 		}
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("vo", vo);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("index.jsp?content1=mypage/myPagePointList.jsp").forward(request, response);
@@ -230,7 +292,9 @@ public class MyPageController extends HttpServlet {
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
 		}
 		String page="faqList";
-		int pageCount=(int)Math.ceil(dao.getMyPageCount(id,page)/10.0);
+		String date1="";
+		String date2="";
+		int pageCount=(int)Math.ceil(dao.getMyPageCount(id,page,date1,date2)/10.0);
 		int startPage=((pageNum-1)/10*10)+1;
 		int endPage=startPage+9;
 		if(endPage > pageCount) {
@@ -249,13 +313,33 @@ public class MyPageController extends HttpServlet {
 	protected void review(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String spageNum=request.getParameter("pageNum");
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int startRow=(pageNum-1)*10+1;
+		int endRow=startRow+9;
+		String page="reviewList";
 		String id=request.getParameter("id");	
 		MyPageDao dao=MyPageDao.getInstance();
-		ArrayList<ReviewVo> list=dao.review(id);
+		String date1="";
+		String date2="";
+		int pageCount=(int)Math.ceil(dao.getMyPageCount(id, page,date1,date2)/10.0);
+		int startPage=((pageNum-1)/10*10)+1;
+		int endPage=startPage+9;
+		if(endPage>pageCount) {
+			endPage=pageCount;
+		}
+		ArrayList<ReviewVo> list=dao.review(id,startRow,endRow);
 		if(list==null) {
 			request.setAttribute("resultMsg", "오류로 인해 해당 정보를 불러들이지 못했습니다...");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
 		}
+		request.setAttribute("pageNum",pageNum);
+		request.setAttribute("startPage",startPage);
+		request.setAttribute("endPage",endPage);
+		request.setAttribute("pageCount",pageCount);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("index.jsp?content1=mypage/myPageReviewList.jsp").forward(request, response);
 	}

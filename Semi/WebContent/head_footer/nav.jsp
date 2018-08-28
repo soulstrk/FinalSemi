@@ -1,11 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-	<!-- 헤더부분 -->
-<nav class="navbar navbar-expand-lg navbar-white" style="height: 90px;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<!-- 추가 Sidebar (최근 본 상품 5개) -->  
+<script src="js/yi_js.js?ver=1"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+<%	String id=(String)session.getAttribute("id"); %>
+   <div>
+	   <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; top:0px;" id="mySidebar">
+		  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+		  <div id="view" style="color:gray;">
+		  </div>
+	   </div>
+	   <input type="hidden" name="id" id="id" value="<%=id%>">
+	   <button id="btn1" class="w3-button w3-gray w3-xlarge" onclick="getView()" style="position:fixed;z-index: 1;top:0px;"><span style="color:white;">☰</span></button>
+   </div>
+   
+  <!-- 헤더부분 -->
+  <nav class="navbar navbar-expand-lg navbar-white" style="height: 90px;">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02">
+	   <span class="navbar-toggler-icon"></span>
+	</button>
+  	
   <!-- 메뉴창들 -->
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav" style="margin-left: 300px;">
@@ -14,8 +30,6 @@
       </li>
       <li class="nav-item active" > <!-- 로그인 / 로그아웃 처리 -->
       	<%
-      		//예인: 아이디 변수명 줬음
-      		String id=(String)session.getAttribute("id");
 			if(id != null){ 
 		%>
 			<a class="nav-link" href="logout.jsp" id="login_logout"><b>Logout</b></a>
@@ -79,7 +93,7 @@
         <a class="navbar-brand" href="index.jsp?content1=mainPage.jsp"><img src="images/hd_logo.png" style="width: 223px; height: 45px; position: relative; left: 250px; padding-bottom: 0px;"></a>
       </li>
       <li class="nav-item active" id="myPage">
-        <a class="nav-link" href="mypage.do?cmd=info&id=<%=id%>&info=mypage"><b>My page</b></a>
+        <a class="nav-link" href="mypage.do?cmd=info&id=<%=id%>&info=mypage&date=x&date1=0&date2=0"><b>My page</b></a>
       </li>
       <li class="nav-item active">
         <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 755px;" method="post" action="search.do?pageNum=1">
@@ -87,7 +101,6 @@
 	      <button class="btn" type="submit"><img src="images/magnifier.png"></button>
 	    </form>
       </li>
-      <!-- 예인: 마이페이지 추가함 -->
     </ul>
   </div>
 </nav>

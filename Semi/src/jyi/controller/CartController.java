@@ -1,6 +1,7 @@
 package jyi.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,9 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import jyi.dao.CartDao;
 import jyi.vo.CartVo;
 import jyi.vo.ProductsVo;
+import jyi.vo.ViewsVo;
 
 @WebServlet("/cart.do")
 public class CartController extends HttpServlet {
@@ -30,7 +35,9 @@ public class CartController extends HttpServlet {
 			delete(request, response);
 		} else if(cmd.equals("update")) {
 			update(request, response);
-		}
+		} else if(cmd.equals("view")) {
+			view(request, response);
+		} 
 
 	}
 
@@ -90,6 +97,37 @@ public class CartController extends HttpServlet {
 			request.setAttribute("resultMsg", "오류로 인해 수량변경에 실패했습니다.");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
 		}
+	}
 	
+	//최근 본 상품 5개 불러오기
+	protected void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		String id=request.getParameter("id");
+		System.out.println(id);
+		CartDao dao=CartDao.getInstance();
+		ArrayList<ViewsVo> list=dao.getView(id);
+		if(list==null) {
+			request.setAttribute("resultMsg", "오류로 정보를 불러오지 못했습니다.");
+			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
+		}
+		ArrayList<CartVo> cartlist=new ArrayList<CartVo>();
+		for(ViewsVo vo:list) {
+			int c_p_num=vo.getP_num();
+			CartVo v=new CartVo(0, id, c_p_num, 0, null);
+			cartlist.add(v);
+		}
+		ArrayList<ProductsVo> plist=dao.getProducts(cartlist);
+		JSONArray arr=new JSONArray();
+		for(ProductsVo pv:plist) {
+			System.out.println(pv.getP_name());
+			JSONObject obj=new JSONObject();
+			obj.put("p_name", pv.getP_name());
+			obj.put("p_image", pv.getP_image());
+			arr.add(obj);
+		}
+		response.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw=response.getWriter();
+		pw.println(arr.toString());
+		pw.close();
 	}
 }

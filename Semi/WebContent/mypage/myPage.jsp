@@ -41,15 +41,14 @@ ul {
 			<tr>
 				<td><div><br>
 						<ul>
-							
 							<li>배송준비중</li>
 							<c:choose>
-								<c:when test="${ordervo.o_state==0 }">
-									<li><a href="mypage.do?cmd=orderinfo&id=${ordervo.o_id }&o_num=${ordervo.o_num}">1</a></li>
+								<c:when test="${state1 >= 1 }">
+									<li><a href="mypage.do?cmd=orderlist&id=${id }">${state1 }</a></li>
 								</c:when>
-								<c:otherwise>
+								<c:when test="${state1 == 0 }">
 									<li>-</li>
-								</c:otherwise>
+								</c:when>
 							</c:choose>
 						</ul>
 					</div></td>
@@ -57,12 +56,12 @@ ul {
 						<ul>
 							<li>배송중</li>
 							<c:choose>
-								<c:when test="${ordervo.o_state==1 }">
-									<li><a href="mypage.do?cmd=orderinfo&id=${ordervo.o_id }&o_num=${ordervo.o_num}">1</a></li>
+								<c:when test="${state2 >= 1 }">
+									<li><a href="mypage.do?cmd=orderlist&id=${id }">${state2 }</a></li>
 								</c:when>
-								<c:otherwise>
+								<c:when test="${state2 == 0 }">
 									<li>-</li>
-								</c:otherwise>
+								</c:when>
 							</c:choose>
 						</ul>
 					</div></td>
@@ -70,21 +69,39 @@ ul {
 						<ul>
 							<li>배송완료</li>
 							<c:choose>
-								<c:when test="${ordervo.o_state==2 }">
-									<li><a href="mypage.do?cmd=orderinfo&id=${ordervo.o_id }&o_num=${ordervo.o_num}">1</a></li>
+								<c:when test="${state3 >= 1 }">
+									<li><a href="mypage.do?cmd=orderlist&id=${id }">${state3 }</a></li>
 								</c:when>
-								<c:otherwise>
+								<c:when test="${state3 == 0 }">
 									<li>-</li>
-								</c:otherwise>
+								</c:when>
 							</c:choose>
 						</ul>
 					</div></td>
 				<td>
 					<div>
 						<ul>
-							<li>취소:</li>
-							<li>교환:</li>
-							<li>반품:</li>
+							<li><br></li>
+							<li>취소:
+							<c:choose>
+								<c:when test="${state0 >= 1 }">
+									<a href="mypage.do?cmd=orderlist&id=${id }">${state0 }</a>
+								</c:when>
+								<c:when test="${state0 == 0 }">
+									-
+								</c:when>
+							</c:choose> 
+							</li>
+							<li>반품: <!-- 반품승인중 -->
+							<c:choose>
+								<c:when test="${state4 >= 1 }">
+									<a href="mypage.do?cmd=orderlist&id=${id }">${state4 }</a>
+								</c:when>
+								<c:when test="${state4 == 0 }">
+									-
+								</c:when>
+							</c:choose>
+							</li>
 						</ul>
 					</div>
 				</td>

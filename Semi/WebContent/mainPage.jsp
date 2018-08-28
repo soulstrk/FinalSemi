@@ -32,7 +32,7 @@ $(document).ready(function() {
 		  </ul>
 		
 		  <!-- 슬라이드쇼 그림 -->
-		  <div class="carousel-inner">
+		  <div class="carousel-inner" style="z-index: 0;">
 		    <div class="carousel-item active">
 		      <img class="s_img" src="images/s3.jpg" alt="Los Angeles">
 		    </div>

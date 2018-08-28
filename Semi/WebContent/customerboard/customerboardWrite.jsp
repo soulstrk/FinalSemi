@@ -5,6 +5,8 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="js/yi_js.js"></script>
+
 <%
 	
 	String id = (String) session.getAttribute("id");
@@ -24,7 +26,7 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form action="customerboard.do?cmd=<%=write %>" method="post">
+			<form action="customerboard.do?cmd=<%=write %>" method="post" onsubmit="return getSubmit()">
 				<table class="table table-striped">
 					<tr>
 						<th>Title</th>
@@ -38,7 +40,7 @@
 					<tr>
 						<th>Content</th>
 						<td colspan="5"><textarea id="b_content" name="b_content"
-								style="width: 550px; color: gray;" onclick="getBlank()"><%=b_content %></textarea></td>
+								style="width: 580px; height: 300px;color: gray;resize: none;" onclick="getBlank()" ><%=b_content %></textarea></td>
 					</tr>
 					<tr>
 						<th>Public/Private</th>
@@ -60,24 +62,3 @@
 		<div class="col-md-2"></div>
 	</div>
 </div>
-<script>
-	function getBlank1() {
-		setTimeout(function() {
-			var title = document.getElementById("b_title");
-			if(title.value=="20자 이내로 작성해주세요"){
-				title.value = "";
-				title.focus();
-			}
-				
-		}, 10);
-	}
-	function getBlank() {
-		setTimeout(function() {
-			var content = document.getElementById("b_content");
-			if(content.innerHTML=="200자 이내로 작성해주세요"){
-				content.innerHTML = "";
-				content.focus();
-			}
-		}, 10);
-	}
-</script>

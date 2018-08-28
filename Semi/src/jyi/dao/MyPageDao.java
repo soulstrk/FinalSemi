@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import ljy.db.DBConnection;
 import jyi.vo.CustomerBoardVo;
@@ -132,23 +133,41 @@ public class MyPageDao {
 	// --------------------------------------------------------------------------------
 
 	// 마이페이지 회원 주문전체내역 불러오기
-	public ArrayList<OrderVo> getOrderList(String id, int startRow, int endRow) {
+	public ArrayList<OrderVo> getOrderList(String id, int startRow, int endRow,String date,String startDate,String endDate) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBConnection.getConn();
 			String sql="";
-			if(startRow==0 && endRow==0) {
-				sql="select * from order_table where o_id=? order by o_num desc";
-			}else {
+			if(startRow==0 && endRow==0 && date.equals("x")) {
+				sql="select * from order_table where o_id=? order by o_date desc";
+			}else if((startRow !=0 || endRow!=0) && date.equals("x")){
 				sql = "select * from(select aa.*, rownum rnum from("+
-						"select * from order_table where o_id=? order by o_num desc)aa ) "+
+						"select * from order_table where o_id=? order by o_date desc)aa ) "+
+						"where rnum >=? and rnum <=?";
+			}else if(date.equals("date") && !(startDate.equals(endDate))) {
+				sql="select * from(select aa.*, rownum rnum, aa.o_date dd from("+ 
+						"select * from order_table where o_id=? and to_char(o_date) between ? and ? order by o_date desc)aa ) " + 
+						"where rnum >=? and rnum <=?";
+			}else if(date.equals("date") && (startDate.equals(endDate))) {
+				sql="select * from(select aa.*, rownum rnum, aa.o_date dd from("+ 
+						"select * from order_table where o_id=? and to_char(o_date)=? order by o_date desc)aa ) " + 
 						"where rnum >=? and rnum <=?";
 			}
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			if(!(startRow==0 && endRow==0)) {
+			if(date.equals("date") && !(startDate.equals(endDate))) {
+				pstmt.setString(2, startDate);
+				pstmt.setString(3, endDate);
+				pstmt.setInt(4, startRow);
+				pstmt.setInt(5, endRow);
+			}else if(date.equals("date") && (startDate.equals(endDate))) {
+				pstmt.setString(2, startDate);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+			}
+			if(!(startRow==0 && endRow==0) && date.equals("x")) {
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, endRow);
 			}
@@ -246,7 +265,6 @@ public class MyPageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			System.out.println(o_num);
 			con = DBConnection.getConn();
 			String sql = "select * from order_info where oi_num=?";
 			pstmt = con.prepareStatement(sql);
@@ -272,17 +290,18 @@ public class MyPageDao {
 	}
 
 	// 최근 주문 내역 정보 불러오기
-	public OrderVo getLatelyOrder(String id) {
+	public ArrayList<OrderVo> getLatelyOrder(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBConnection.getConn();
-			String sql = "select * from(select ot.*, rownum rnum from order_table ot where o_id=? order by o_num desc)  where rnum=1";
+			String sql = "select * from order_table where o_id=? order by o_num desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
+			ArrayList<OrderVo> list=new ArrayList<OrderVo>();
+			while(rs.next()) {
 				int o_num = rs.getInt("o_num");
 				String o_id = id;
 				Date o_date = rs.getDate("o_date");
@@ -296,9 +315,9 @@ public class MyPageDao {
 				int o_amount = rs.getInt("o_amount");
 				OrderVo vo = new OrderVo(o_num, o_id, o_date, o_addr, o_paymethod, o_deliverynum, o_phone, o_msg,
 						o_payment, o_state, o_amount);
-				return vo;
+				list.add(vo);
 			}
-			return null;
+			return list;
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
@@ -328,7 +347,6 @@ public class MyPageDao {
 					int minus_point = rs.getInt("minus_point");
 					OrderPointVo opv = new OrderPointVo(num, o_num, plus_point, minus_point);
 					opvList.add(opv);
-					System.out.println(opv);
 				}
 			}
 			return opvList;
@@ -380,8 +398,8 @@ public class MyPageDao {
 		}
 	}
 	
-	//마이페이지 회원 게시물 총 수량 구하기(주문, faq, point)
-	public int getMyPageCount(String id, String page){
+	//마이페이지 회원 게시물 총 수량 구하기(주문, faq, point,review)
+	public int getMyPageCount(String id, String page, String date1, String date2){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -389,18 +407,25 @@ public class MyPageDao {
 			con=DBConnection.getConn();
 			String sql="";
 			if(page.equals("orderList")) { //주문
-				sql="select NVL(count(o_num),0) count from order_table where o_id=?";
+				sql="select NVL(count(o_num),0) count from order_table where o_id=? and to_char(o_date) >=? and to_char(o_date) <=?";
 			}else if(page.equals("faqList")){ //고객센터 게시물
 				sql="select NVL(count(b_num),0) count from customer_board where b_id=?";
+			}else if(page.equals("pointList")) { //적립금 게시물
+				sql="select NVL(count(num),0) count from order_point where o_num in(select o_num from order_table where o_id=?)";
+			}else if(page.equals("reviewList")) {
+				sql="select nvl(count(adminok),0) count from review where id=?";
 			}
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			if(page.equals("orderList")) {
+				pstmt.setString(2, date1);
+				pstmt.setString(3, date2);
+			}
 			rs=pstmt.executeQuery();
 			int n=0;
 			if(rs.next()) {
 				n=rs.getInt("count");
 			}
-			System.out.println(n+"!!!");
 			return n;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
@@ -411,15 +436,19 @@ public class MyPageDao {
 	}
 	
 	//마이페이지 고객 상품후기 불러오기
-	public ArrayList<ReviewVo> review(String id) {
+	public ArrayList<ReviewVo> review(String id, int startRow, int endRow) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=DBConnection.getConn();
-			String sql="select * from review where id=? order by adminok desc";
+			String sql="select * from(select aa.*, rownum rnum from("+
+					"select * from review where id=? order by adminok desc) aa) "+
+					"where rnum>=? and rnum <=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<ReviewVo> list=new ArrayList<ReviewVo>();
 			while(rs.next()) {

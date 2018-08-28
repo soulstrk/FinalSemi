@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import jyi.vo.CartVo;
 import jyi.vo.ProductsVo;
+import jyi.vo.ViewsVo;
 import ljy.db.DBConnection;
 
 public class CartDao {
@@ -131,6 +132,36 @@ public class CartDao {
 			return -1;
 		}finally {
 			DBConnection.closeConn(null, pstmt, con);
+		}
+	}
+
+	//최근 본 5개 상품번호 불러오기
+	public ArrayList<ViewsVo> getView(String id){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DBConnection.getConn();
+			String sql="select * from (select aa.*, rownum rnum from ("+
+						"select * from views where id=? order by v_snum desc) aa) "+
+						"where rnum >=0 and rnum<=4";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			ArrayList<ViewsVo> list=new ArrayList<ViewsVo>();
+			while(rs.next()) {
+				int v_num=rs.getInt("v_num");
+				int p_num=rs.getInt("p_num");
+				int v_snum=rs.getInt("v_snum");
+				ViewsVo vo=new ViewsVo(v_num, id, p_num, v_snum);
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DBConnection.closeConn(rs, pstmt, con);
 		}
 	}
 }
