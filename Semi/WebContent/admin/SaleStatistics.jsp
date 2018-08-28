@@ -7,6 +7,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 <link href="css/saleStatistics.css?ver=6" rel="stylesheet">
+<head>
+	 <style type="text/css">
+	 	td{
+	 		font-size: 21px;
+	 		font-weight: bold;
+	 	}
+	 </style>
+</head>    
 </head>
 <div class="container-fluid" style="padding-top: 150px;">
 	<div class="row">

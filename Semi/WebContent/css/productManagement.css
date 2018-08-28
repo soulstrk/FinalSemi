@@ -10,6 +10,7 @@
 	font-family: 'Nanum Myeongjo', serif;
 }
 
+
 #seeGraph{
 	font-size: 50px;
 	color: #000080;
@@ -21,6 +22,7 @@
 	font-size: 30px;
 	font-family: 'Jeju Myeongjo', serif;
 	color: #27a2b5;
+	
 }
 
 #productManagement table tr td{
@@ -34,4 +36,8 @@
 .btn1,.btn2{
 	width: 50px;
 	height: 50px;
+}
+
+#ohTable td{
+	font-size: 22px;
 }

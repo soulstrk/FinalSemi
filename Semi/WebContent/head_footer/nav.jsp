@@ -83,12 +83,13 @@
       </li>
       <li class="nav-item active">
         <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 755px;" method="post" action="search.do?pageNum=1">
-	      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
+	      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" id="searchP" onkeyup="searchW()">
 	      <button class="btn" type="submit"><img src="images/magnifier.png"></button>
 	    </form>
       </li>
       <!-- 예인: 마이페이지 추가함 -->
     </ul>
+    <div style="background-color:black; color: white; border: 1px solid red; position: relative; left: 480px; top:260px; width: 300px; z-index: 1; height: 500px; display: none;" id="testing"></div>
   </div>
 </nav>
 
@@ -111,7 +112,7 @@
 	            </div>
 	            <div class="form-group">
 	              <button class="btn btn-info btn-lg btn-block">로그인</button>
-	              <span><a href="index.jsp?content1=join.jsp">회원가입</a></span><span style="float: right;"><a href="#" id="findInfo">아이디/비밀번호 찾기</a></span>
+	              <span><a href="index.jsp?content1=join.jsp">회원가입</a></span><span style="float: right;"><a href="index.jsp?content1=findInfo.jsp" id="findInfo">아이디/비밀번호 찾기</a></span>
 	            </div>
 	          </form>
 	      </div>
@@ -123,5 +124,33 @@
 	  </div>
 	  </div>
 	</div>
+	
+<script type="text/javascript">
+		function searchW() {
+			 var word = $('#searchP').val();
+			 if(word == ""){
+				 return;
+			 }
+			 $('#testing').css('display','block');
+			$.ajax({
+				url : "searchWord.do?cmd=1&word="+word,
+				dataType : 'json',
+				success: function(data) {
+					if(data.msg == 1){
+						alert('여기');
+						return;
+					}else{
+						$('#testing').text(' ');
+						for (var i = 0; i < data.list.length; i++) {
+							var pNum = data.list[i].pNum;
+							var pName = data.list[i].pName;
+							var pPrice = data.list[i].pPrice;
+							$('#testing').append('<span>'+pNum+''+pName+'</span><br>');
+						}
+					}
+				}
+			});
+		}
+</script>	
 	
 

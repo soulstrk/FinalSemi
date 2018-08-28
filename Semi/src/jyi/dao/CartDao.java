@@ -133,4 +133,68 @@ public class CartDao {
 			DBConnection.closeConn(null, pstmt, con);
 		}
 	}
+	
+	public int insert(String id, String pNum, int amount) { //카트에 상품 담기
+		Connection conn=null;
+		PreparedStatement ps=null;
+		String sql = "insert into cart values(cart_seq.nextval,?,?,?,sysdate)";
+		try {
+			conn=DBConnection.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, pNum);
+			ps.setInt(3, amount);
+			return ps.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DBConnection.closeConn(null, ps, conn);
+		}
+	}
+	
+	public int productDupliChk(String id, String pNum) { //카트에 상품 담기
+		Connection conn=null;
+		PreparedStatement ps=null;
+		ResultSet rs = null;
+		String sql = "select * from cart where c_id = ? and c_p_num = ?";
+		try {
+			conn=DBConnection.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, pNum);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return -1;
+			}else {
+				return 1;
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return 1;
+		}finally {
+			DBConnection.closeConn(null, ps, conn);
+		}
+	}
+	
+	public int updateAmount(String id, String pNum, int amount) { //카트에 상품 담기
+		Connection conn=null;
+		PreparedStatement ps=null;
+		String sql = "update cart set c_amount = c_amount + ? where c_id = ? and c_p_num = ?";
+		try {
+			conn=DBConnection.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, amount);
+			ps.setString(2, id);
+			ps.setString(3, pNum);
+			int w = ps.executeUpdate();
+			return w;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			System.out.println("updateAmount");
+			return -1;
+		}finally {
+			DBConnection.closeConn(null, ps, conn);
+		}
+	}
 }

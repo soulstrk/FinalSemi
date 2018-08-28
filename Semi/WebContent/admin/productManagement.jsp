@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="css/productManagement.css?ver=4" rel="stylesheet">
-    
+<head>
+	 <style type="text/css">
+	 	td{
+	 		font-size: 25px;
+	 	}
+	 </style>
+</head>    
 <div class="container-fluid" style="padding-top: 150px;">
 	<div class="row">
 		<div class="col-md-12 orderHistory" style="text-align: center;"><span>ORDER HISTORY</span>
@@ -14,7 +19,7 @@
 		<div class="col-md-10" id="productManagement">
 			<button type="button" style="float: left;" class="btn1"> &lt; </button>
 			<button type="button" style="float: right;" class="btn2"> &gt; </button>
-			<table class="table table-striped">
+			<table class="table table-striped" id="ohTable">
 				<tr>
 					<th class="f1">주문번호</th>
 					<th class="f1">아이디</th>
