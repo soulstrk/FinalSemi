@@ -12,7 +12,7 @@
 <c:if test="${empty list}">
 <script type="text/javascript">
 $(document).ready(function() {
-	location.href = "mainList.do"
+	location.href = "mainList.do";
 })
 </script>
 </c:if>

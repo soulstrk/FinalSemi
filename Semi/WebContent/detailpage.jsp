@@ -7,7 +7,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
+<% String id=(String)session.getAttribute("id");%>
 <c:if test="${!empty cartMsg }">
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -81,7 +81,7 @@ a{
 
 </style>
 
-	<script language="JavaScript">
+<script type="text/javascript">
 
 var sell_price;
 var amount;
@@ -278,7 +278,6 @@ function sendCart(){
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<% String id = (String)session.getAttribute("id"); %>
 		<% if(id != null){ %> 
 			<input type="text" placeholder="상품후기를 입력해주세요." id="com" style="width: 400px;"><button type="button" onclick="comInsert()">입력</button>
 		<% } else{	%>
@@ -292,7 +291,32 @@ function sendCart(){
 
 	$(document).ready(function() {
 		getList();
+		insertv();
 	})
+	
+<%	
+	if(id!=null){
+%>		
+	var xhr=null;
+	function insertv(){
+		xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=insertView;
+		xhr.open('get','cart.do?cmd=insertView&id=<%=id%>&p_num=${vo.p_num}',true);
+		xhr.send();
+	};	
+	
+	function insertView(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var data=xhr.responseText;
+			var json=JSON.parse(data);
+			if(json.n>0){
+				return;
+			}
+		}		
+	}
+<%	
+	}
+%>
 	
 	function getList() {
 		$.ajax({

@@ -25,6 +25,7 @@ public class CustomerBoardController extends HttpServlet {
 		String cmd = request.getParameter("cmd");
 		if (cmd.equals("index")) {
 			response.sendRedirect("index.jsp");
+			return;
 		} else if (cmd.equals("list")) {
 			list(request, response);
 		} else if (cmd.equals("info")) {
@@ -60,6 +61,7 @@ public class CustomerBoardController extends HttpServlet {
 		String find=request.getParameter("find");
 		if(select !=null && !select.equals("") && find !=null && !find.equals("") ) {
 			find(request,response);
+			return;
 		}
 		String spageNum=request.getParameter("pageNum");
 		int pageNum=1;

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!-- 추가 Sidebar (최근 본 상품 5개) -->  
-<script src="js/yi_js.js?ver=1"></script>
+<script src="js/yi_js.js?ver=2"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <%	String id=(String)session.getAttribute("id"); %>
@@ -90,7 +90,7 @@
 		<% }} %>
       </li>
       <li class="nav-item active">
-        <a class="navbar-brand" href="index.jsp?content1=mainPage.jsp"><img src="images/hd_logo.png" style="width: 223px; height: 45px; position: relative; left: 250px; padding-bottom: 0px;"></a>
+        <a class="navbar-brand" href="../mainList.do"><img src="images/hd_logo.png" style="width: 223px; height: 45px; position: relative; left: 250px; padding-bottom: 0px;"></a>
       </li>
       <li class="nav-item active" id="myPage">
         <a class="nav-link" href="mypage.do?cmd=info&id=<%=id%>&info=mypage&date=x&date1=0&date2=0"><b>My page</b></a>
