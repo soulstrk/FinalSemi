@@ -128,7 +128,7 @@ function sendorderpage(){
 	var price=document.getElementsByName("sum")[0].value;
 	var amount= document.form.amount.value; // 폼에 있으면 이런식으로도 가능하다.
 	var sprice =(price*0.2);
-	location.href="index.jsp?content1=orderpage.jsp&p_name=${vo.p_name}&p_price=${vo.p_price}&p_partist=${vo.p_artist}&p_img=${vo.p_image}&sprice="+sprice+"&price="+price+"&amount="+amount;
+	location.href="index.jsp?content1=orderpage.jsp&p_num=${vo.p_num}&p_name=${vo.p_name}&p_price=${vo.p_price}&p_partist=${vo.p_artist}&p_img=${vo.p_image}&sprice="+sprice+"&price="+price+"&amount="+amount;
 	
 
 	
@@ -236,7 +236,7 @@ function sendCart(){
 						<ul style="width: 540px;">
 							<li class="origin_img">
 								
-								<img src="pImages/${vo.p_image}"style="width:540px; height:340px;">
+								<img src="painting/o/${vo.p_image}"style="width:540px; height:340px;">
 							
 							</li>
 						

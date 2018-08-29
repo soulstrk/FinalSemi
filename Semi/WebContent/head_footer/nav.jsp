@@ -53,8 +53,8 @@
         <a class="nav-link active dropdown-toggle" href="customerboard.do?cmd=list" data-toggle="dropdown"><b>Picture</b>
 		  <span class="caret"></span></a>
 		  <ul class="dropdown-menu">
-		    <li><a href="#">동양화</a></li>
-		    <li><a href="#">서양화</a></li>
+		    <li><a href="opainting.do?cmd=oriental">동양화</a></li>
+		    <li><a href="opainting.do">서양화</a></li>
 		  </ul>
 		</div>
       </li>

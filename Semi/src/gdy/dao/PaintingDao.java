@@ -95,9 +95,8 @@ public class PaintingDao {
 				
 			}
 			
-				String sql = "select NVL(count(p_num),0) maxnum from products where "+search+searchCase;
+				String sql = "select NVL(count(p_num),0) maxnum from products";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, keyword);
 				rs = pstmt.executeQuery();
 			
 			}
@@ -123,7 +122,7 @@ public class PaintingDao {
 		
 	}
 	
-	public ArrayList<PaintingVo> list(int startRow, int endRow, String search){
+	public ArrayList<PaintingVo> list(int startRow, int endRow, String search, String keyword){
 		
 		System.out.println("startRow:"+startRow+"endRow:"+endRow);
 		Connection con = DBConnection.getConn();
@@ -134,7 +133,7 @@ public class PaintingDao {
 		try {
 			
 			if(search == null) {
-				
+				System.out.println("if문실행");
 				String sql =
 						
 						"select *from"+
@@ -145,7 +144,8 @@ public class PaintingDao {
 						"order by p_num desc"+
 						")AA"+
 						")where rnum>=? and rnum<=?";
-						
+				
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, startRow);
 				pstmt.setInt(2, endRow);
@@ -156,6 +156,10 @@ public class PaintingDao {
 				
 				
 			}else {
+				
+				System.out.println("else문실행");
+
+
 				String sql =
 						
 						"select *from"+
@@ -163,13 +167,15 @@ public class PaintingDao {
 						"select AA.*, rownum rnum from"+
 						"("+
 						"select *from products "+
-						"order by p_num desc"+
+						"where "+search+" Like ?||'%'"+
 						")AA"+
 						")where rnum>=? and rnum<=?";
 						
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
+				
+				pstmt.setString(1, keyword);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
 				rs=pstmt.executeQuery();
 				
 				
