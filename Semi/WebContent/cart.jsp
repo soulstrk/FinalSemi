@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/cartPage.css" />
 <link rel="stylesheet" href="css/test.css?ver=1" />
 <script src="js/yi_js.js"></script>
-<% String id=(String)session.getAttribute("id"); %>
+<% String id=(String)session.getAttribute("id");// %>
 <div class="container-fulid">
 	<div class="row" style="height: 100px;"></div>
 	<div class="row" style="height: 100px;">
