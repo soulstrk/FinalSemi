@@ -24,7 +24,7 @@ import ljy.vo.ProductVo;
 public class AdminEnrollController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String rootPath = request.getSession().getServletContext().getRealPath("/pImages");
+		String rootPath = request.getSession().getServletContext().getRealPath("/painting/o");
 		MultipartRequest mr = new MultipartRequest(request,
 				rootPath,
 				1024*1024*5,

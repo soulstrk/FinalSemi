@@ -160,7 +160,7 @@ setInterval(function() {
 					var pNum = data.liveList[cnt].pNum;
 					var pImage = data.liveList[cnt].pImage;
 					var pName = data.liveList[cnt].pName;
-					$('#liveImage').attr('src','pImages/'+pImage);
+					$('#liveImage').attr('src','painting/o/'+pImage);
 					$('#liveSpan').html('<h3>'+(cnt+1)+'</h3><a href="opainting.do?cmd=detail&p_num='+pNum+'" style="font-size:25px;">'+pName+'</a>');
 					cnt++;
 				}
@@ -194,7 +194,7 @@ function searchW() {
 					var pPrice = data.list[i].pPrice;
 					var pImage = data.list[i].pImage;
 					$('#testing').append('<a href="opainting.do?cmd=detail&p_num='+pNum+'">'+pName+' &nbsp&nbsp;&nbsp;&nbsp;'+pPrice+'원</a><br>');
-					$('#testing').append('<img src=pImages/'+pImage+' style="width:180px; height:140px;"><br><br>');
+					$('#testing').append('<img src=painting/o/'+pImage+' style="width:180px; height:140px;"><br><br>');
 				}
 			}
 		}

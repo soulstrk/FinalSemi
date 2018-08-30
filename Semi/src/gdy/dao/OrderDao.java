@@ -121,6 +121,7 @@ public class OrderDao {
 		}catch(SQLException se) {
 			
 			System.out.println(se.getMessage());
+			System.out.println("¿©±â?");
 			return -1;
 		}
 	}
