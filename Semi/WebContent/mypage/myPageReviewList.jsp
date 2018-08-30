@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% String id=(String)session.getAttribute("id"); %>
 <title>MYPAGE</title>
-<div class="container">
+<div class="container"  style="margin-bottom: 730px;">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">

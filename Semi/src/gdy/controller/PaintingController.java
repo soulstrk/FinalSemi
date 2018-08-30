@@ -28,15 +28,18 @@ public class PaintingController extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
 		String cmd = request.getParameter("cmd");
 		
+		System.out.println("cmd의값은="+cmd);
+		
 		if(cmd.equals("oriental")) {
 			olist(request,response);
 			
 		}else if(cmd.equals("detail")){
 			detail(request,response);
-		}
-		
+	
+	}
 	}
 	
+
 	
 	
 	
@@ -47,13 +50,15 @@ public class PaintingController extends HttpServlet{
 		
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
-		String spageNum = request.getParameter("pageNum");
+		String spageNum = request.getParameter("pageNum");//null 
 		
 		int pageNum=1; //페이지를 기본으로 1로
 		if(spageNum != null) {
 			
 			pageNum=Integer.parseInt(spageNum);
 		}
+		
+		System.out.println(" "+search+" "+keyword+" "+pageNum);
 		
 		
 		
@@ -63,13 +68,14 @@ public class PaintingController extends HttpServlet{
 		int endRow = (pageNum*12);// 즉 1~12 게시물 까지 출력
 
 		PaintingDao dao = PaintingDao.getInstance();
-		ArrayList<PaintingVo> list =dao.list(startRow,endRow,search);
+		ArrayList<PaintingVo> list =dao.list(startRow,endRow,search,keyword);
 		
 		
 		if(list!=null) {
 			
 			//페이지 갯수 구하기 필요한거 ? 전체글의 갯수 / 페이지 행의 총 갯수 Math.ceil로 올림처리해야
-			int pageCount = (int)(Math.ceil(dao.getCount(search,keyword)/5.0));
+			int pageCount = (int)(Math.ceil(dao.getCount(search,keyword)/12.0));
+			System.out.println(pageCount);
 			
 			// 시작페이지 구하기
 			int startPageNum = ((pageNum-1)/5*5)+1;

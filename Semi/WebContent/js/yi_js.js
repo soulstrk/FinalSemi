@@ -25,7 +25,7 @@ function getViewInfo(){
 				var p_image=json[i].p_image;
 				var a=document.createElement("a");
 				a.className="w3-bar-item w3-button";
-				a.href="#";	
+				a.href="opainting.do?cmd=detail&p_num="+json[i].p_num;	
 				var img=document.createElement("img");
 				img.src=p_image;
 				a.appendChild(img);

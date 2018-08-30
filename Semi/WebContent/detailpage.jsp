@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<% String id=(String)session.getAttribute("id");%>
 <c:if test="${!empty cartMsg }">
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -54,6 +54,7 @@ a{
 }
 
 .right_centainer{
+
 	width:500px;
 	height: 490px;
 	margin: 26px 650px 0 0;
@@ -76,7 +77,7 @@ a{
 
 </style>
 
-	<script language="JavaScript">
+<script type="text/javascript">
 
 var sell_price;
 var amount;
@@ -119,10 +120,11 @@ function change () {
 
 
 function sendorderpage(){
+	
 	var price=document.getElementsByName("sum")[0].value;
 	var amount= document.form.amount.value; // 폼에 있으면 이런식으로도 가능하다.
 	var sprice =(price*0.2);
-	location.href="index.jsp?content1=orderpage.jsp&p_name=${vo.p_name}&p_price=${vo.p_price}&p_partist=${vo.p_artist}&p_img=${vo.p_image}&sprice="+sprice+"&price="+price+"&amount="+amount;
+	location.href="index.jsp?content1=orderpage.jsp&p_num=${vo.p_num}&p_name=${vo.p_name}&p_price=${vo.p_price}&p_partist=${vo.p_artist}&p_img=${vo.p_image}&sprice="+sprice+"&price="+price+"&amount="+amount;
 }
 
 
@@ -229,7 +231,7 @@ function sendCart(){
 						<ul style="width: 540px;">
 							<li class="origin_img">
 								
-								<img src="pImages/${vo.p_image}"style="width:540px; height:340px;">
+								<img src="painting/o/${vo.p_image}"style="width:540px; height:340px;">
 							
 							</li>
 						
@@ -285,7 +287,32 @@ function sendCart(){
 
 	$(document).ready(function() {
 		getList();
+		insertv();
 	})
+	
+<%	
+	if(id!=null){
+%>		
+	var xhr=null;
+	function insertv(){
+		xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=insertView;
+		xhr.open('get','cart.do?cmd=insertView&id=<%=id%>&p_num=${vo.p_num}',true);
+		xhr.send();
+	};	
+	
+	function insertView(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var data=xhr.responseText;
+			var json=JSON.parse(data);
+			if(json.n>0){
+				return;
+			}
+		}		
+	}
+<%	
+	}
+%>
 	
 	function getList() {
 		$.ajax({

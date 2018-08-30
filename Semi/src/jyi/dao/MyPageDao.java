@@ -106,7 +106,7 @@ public class MyPageDao {
 		try {
 			con = DBConnection.getConn();
 			con.setAutoCommit(false);
-			String sql = "update members set adminok = -1 where id=? and pwd=?";
+			String sql = "update members set comments_num = -1 where id=? and pwd=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
@@ -413,7 +413,7 @@ public class MyPageDao {
 			}else if(page.equals("pointList")) { //적립금 게시물
 				sql="select NVL(count(num),0) count from order_point where o_num in(select o_num from order_table where o_id=?)";
 			}else if(page.equals("reviewList")) {
-				sql="select nvl(count(adminok),0) count from review where id=?";
+				sql="select nvl(count(comments_num),0) count from review where id=?";
 			}
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -443,7 +443,7 @@ public class MyPageDao {
 		try {
 			con=DBConnection.getConn();
 			String sql="select * from(select aa.*, rownum rnum from("+
-					"select * from review where id=? order by adminok desc) aa) "+
+					"select * from review where id=? order by comments_num desc) aa) "+
 					"where rnum>=? and rnum <=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -452,10 +452,10 @@ public class MyPageDao {
 			rs=pstmt.executeQuery();
 			ArrayList<ReviewVo> list=new ArrayList<ReviewVo>();
 			while(rs.next()) {
-				int adminOk=rs.getInt("adminOk");
+				int comments_num=rs.getInt("comments_num");
 				int product_num=rs.getInt("product_num");
 				String content=rs.getString("content");
-				ReviewVo vo=new ReviewVo(adminOk, product_num, id, content);
+				ReviewVo vo=new ReviewVo(comments_num, product_num, id, content);
 				list.add(vo);
 			}
 			return list;
@@ -468,15 +468,15 @@ public class MyPageDao {
 	}
 	
 	//마이페이지 상품후기 삭제하기
-	public int reviewDelete(String id,int adminOk) {
+	public int reviewDelete(String id,int comments_num) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
 			con=DBConnection.getConn();
-			String sql="delete from review where id=? and adminok=?";
+			String sql="delete from review where id=? and comments_num=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setInt(2, adminOk);
+			pstmt.setInt(2, comments_num);
 			int n=pstmt.executeUpdate();
 			return n;
 		} catch (SQLException se) {

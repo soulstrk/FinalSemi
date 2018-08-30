@@ -43,7 +43,9 @@ public class CartController extends HttpServlet {
 			insert(request, response);
 		} else if(cmd.equals("view")) {
 			view(request, response);
-		} 
+		} else if(cmd.equals("insertView")) {
+			insertView(request, response);
+		}
 
 	}
 
@@ -129,6 +131,7 @@ public class CartController extends HttpServlet {
 			JSONObject obj=new JSONObject();
 			obj.put("p_name", pv.getP_name());
 			obj.put("p_image", pv.getP_image());
+			obj.put("p_num", pv.getP_num());
 			arr.add(obj);
 		}
 		response.setContentType("text/plain;charset=utf-8");
@@ -169,4 +172,22 @@ public class CartController extends HttpServlet {
 			}
 		}
 	}
+	
+	//최근본상품 view테이블에 저장
+		protected void insertView(HttpServletRequest request, 
+				HttpServletResponse response) throws ServletException, IOException {
+			request.setCharacterEncoding("utf-8");
+			String id=request.getParameter("id");
+			int p_num=Integer.parseInt(request.getParameter("p_num"));
+			ViewsVo vo=new ViewsVo(0, id, p_num, 0);
+			CartDao dao=CartDao.getInstance();
+			int n=dao.insertView(vo);
+			response.setContentType("text/plain;charset=utf-8");
+			JSONObject json=new JSONObject();
+			json.put("n", n);
+			PrintWriter pw=response.getWriter();
+			pw.println(json.toString());
+			pw.close();
+		}
+	
 }

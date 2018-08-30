@@ -12,9 +12,7 @@ ul {
 	text-align: center;
 }
 </style>
-<div class="container" style="
-    margin-bottom: 441px;
-">
+<div class="container" style="margin-bottom: 441px;">
 <div class="row">
 	<h2>MY PAGE</h2><br>
 </div>
@@ -102,7 +100,7 @@ ul {
 	</div>
 	<div class="col-md-2"></div>
 
-<div class="row">
+<div class="row" >
 	<div class="col-md-6">
 		<table class="table table-hover">
 			<tr>

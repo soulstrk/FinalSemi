@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>MYPAGE</title>
-<div class="container">
+<div class="container"  style="margin-bottom: 600px;">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">

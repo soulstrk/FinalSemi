@@ -5,8 +5,8 @@
 
 <% String id=(String)session.getAttribute("id"); %>
 <title>MYPAGE</title>
-<div class="container">
-	<div class="row">
+<div class="container" style="margin-bottom: 300px;">
+	<div class="row" >
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<h2>MY FAQ</h2>
