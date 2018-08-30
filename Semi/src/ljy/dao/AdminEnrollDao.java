@@ -10,7 +10,7 @@ public class AdminEnrollDao {
 	public int enrollProduct(ProductVo vo) { //상품정보 인서트 메소드
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "insert into products values(product_seq.nextval,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into products values(products_num.nextval,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
@@ -24,7 +24,6 @@ public class AdminEnrollDao {
 			ps.setInt(8, vo.getpBest());
 			ps.setString(9, vo.getpImage());
 			ps.setInt(10, vo.getpDiscountRate());
-			System.out.println(vo);
 			int w = ps.executeUpdate();
 			return w;
 		} catch (Exception e) {
@@ -54,7 +53,6 @@ public class AdminEnrollDao {
 			ps.setInt(8, vo.getpDiscountRate());
 			ps.setInt(9, vo.getpNum());
 			ps.setInt(10, vo.getpBest());
-			System.out.println(vo);
 			int w = ps.executeUpdate();
 			return w;
 		} catch (Exception e) {

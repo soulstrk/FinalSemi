@@ -28,14 +28,10 @@ function getViewInfo(){
 				a.href="opainting.do?cmd=detail&p_num="+json[i].p_num;	
 				var img=document.createElement("img");
 				img.src="painting/o/"+p_image;
-				img.width="500";
-				img.height="500";
-				
+				img.width="370";
+				img.height="370";
 				a.appendChild(img);
-				var div=document.createElement("div");
-				div.innerHTML=p_name;
 				view.appendChild(a);
-				view.appendChild(div);
 			}
 		}
 		w3_open();

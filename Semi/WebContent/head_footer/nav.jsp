@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <%	String id=(String)session.getAttribute("id"); %>
    <div>
-	   <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; top:0px; width:700px;" id="mySidebar">
+	   <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; top:0px; width:400px;z-index: 2;" id="mySidebar">
 		  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
 		  <div id="view" style="color:gray;">
 		  </div>

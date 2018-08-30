@@ -26,10 +26,10 @@
 							<tr>
 								<th rowspan="5">${o_num }</th>
 								<!-- 이미지 누르면 상품 상세페이지로 넘기기 -->
-								<th><img src="images/77.jpg" alt="product"></th>
 								<c:forEach var="list" items="${volist }">
 									<c:choose>
 									<c:when test="${vo.oi_p_num==list.p_num}">
+									<th><img src="painting/o/${list.p_image }" alt="product"></th>
 										<th>${list.p_name }</th>
 									</c:when>
 									<c:otherwise>
