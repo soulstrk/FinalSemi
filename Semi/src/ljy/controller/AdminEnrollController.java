@@ -27,7 +27,7 @@ public class AdminEnrollController extends HttpServlet{
 		String rootPath = request.getSession().getServletContext().getRealPath("/pImages");
 		MultipartRequest mr = new MultipartRequest(request,
 				rootPath,
-				1024*1024*10,
+				1024*1024*5,
 				"utf-8",
 				new DefaultFileRenamePolicy());
 		String savefilename= mr.getFilesystemName("file1"); // 角力 历厘等 颇老疙

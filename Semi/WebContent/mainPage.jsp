@@ -4,6 +4,25 @@
 
 <head>
 	<link href="css/mainPage.css?ver=9" rel="stylesheet">
+<style type="text/css">
+	.hover01 figure img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.hover01 figure:hover img {
+	-webkit-transform: scale(1.15);
+	transform: scale(1.15);
+}
+figure {
+	width: 300px;
+	height: 350px;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+}
+</style>
 </head>
 <!-- 회원가입 성공 실패 메세지 -->
 <c:if test="${!empty signMsg }"><script>var signMsg = "${signMsg}";alert(signMsg);</script></c:if>
@@ -21,7 +40,7 @@ alert('찾으신 아이디는 : ${findId} 입니다');
 </script></c:if>
 
     <!-- 슬라이드쇼 부분  -->
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-top: 20px;">
       <div class="row">
      	 <div id="demo" class="carousel slide coco" data-ride="carousel">
 
@@ -77,8 +96,8 @@ alert('찾으신 아이디는 : ${findId} 입니다');
           	 <c:forEach var="vo" items="${list }" varStatus="status">
           	  <div class="col">
                <div class="card" style="width: 310px; margin-bottom: 30px; height: 550px;">
-                <img class="card-img-top" src="pImages/${vo.pImage }" alt="test">
-                  <a class="card-img-overlay" href="opainting.do?cmd=detail&p_num=${vo.pNum }">
+                <a class="hover01 column" style="z-index: 1" href="opainting.do?cmd=detail&p_num=${vo.pNum }"><figure><img class="card-img-top" src="pImages/${vo.pImage }" alt="test"></figure></a>
+                  <a class="card-img-overlay">
 				    <span class="best" style="display: block;">Best${status.index+1 }</span>
 				  </a>
 				  <div class="card-footer" style="background-color: white;">
@@ -127,7 +146,7 @@ alert('찾으신 아이디는 : ${findId} 입니다');
           	 <c:forEach var="vo" items="${saleList }" varStatus="status">
           	  <div class="col">
                <div class="card" style="width: 310px; margin-bottom: 30px; height: 550px;">
-                <a href="#"><img class="card-img-top" src="pImages/${vo.pImage }" alt="test"></a>
+                <a class="hover01 column" style="z-index: 1" href="opainting.do?cmd=detail&p_num=${vo.pNum }"><figure><img class="card-img-top" src="pImages/${vo.pImage }" alt="test"></figure></a>
                   <a class="card-img-overlay" href="opainting.do?cmd=detail&p_num=${vo.pNum }">
 				    <span class="best" style="display: block;">${vo.pDiscountRate }%</span>
 				  </a>

@@ -32,6 +32,7 @@ public class CartController extends HttpServlet {
 
 		if (cmd.equals("index")) {
 			response.sendRedirect("index.jsp");
+			
 		} else if (cmd.equals("cart")) {
 			cart(request, response);
 		} else if (cmd.equals("delete")) {
@@ -56,6 +57,7 @@ public class CartController extends HttpServlet {
 		if (id == null || id.equals("null")) {
 			request.setAttribute("resultMsg", "로그인 후 이용가능한 페이지입니다.");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
+			return;
 		}
 		CartDao dao = CartDao.getInstance();
 		ArrayList<CartVo> list = dao.getCart(id); // 장바구니 정보
