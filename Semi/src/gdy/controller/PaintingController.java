@@ -51,7 +51,10 @@ public class PaintingController extends HttpServlet{
 		
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
-		String spageNum = request.getParameter("pageNum");//null 
+		String spageNum = request.getParameter("pageNum");//null
+		String p_kinds = request.getParameter("p_kind");
+		
+		System.out.println("p_kind:"+p_kinds);
 		
 		int pageNum=1; //페이지를 기본으로 1로
 		if(spageNum != null) {
@@ -69,13 +72,13 @@ public class PaintingController extends HttpServlet{
 		int endRow = (pageNum*12);// 즉 1~12 게시물 까지 출력
 
 		PaintingDao dao = PaintingDao.getInstance();
-		ArrayList<PaintingVo> list =dao.list(startRow,endRow,search,keyword);
+		ArrayList<PaintingVo> list =dao.list(startRow,endRow,search,keyword,p_kinds);
 		
 		
 		if(list!=null) {
 			
 			//페이지 갯수 구하기 필요한거 ? 전체글의 갯수 / 페이지 행의 총 갯수 Math.ceil로 올림처리해야
-			int pageCount = (int)(Math.ceil(dao.getCount(search,keyword)/12.0));
+			int pageCount = (int)(Math.ceil(dao.getCount(search,keyword,p_kinds)/12.0));
 			System.out.println(pageCount);
 			
 			// 시작페이지 구하기
@@ -101,6 +104,7 @@ public class PaintingController extends HttpServlet{
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("search", search);
 			request.setAttribute("keyword", keyword);
+			request.setAttribute("p_kinds", p_kinds);
 			
 			//3. 뷰페이지로 이동
 			response.setContentType("text/html;charset=utf-8");

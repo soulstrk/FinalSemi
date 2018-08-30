@@ -32,6 +32,7 @@ public class MainListDao {
 				String image = rs.getString("p_image");
 				int discountRate = rs.getInt("p_discount_rate");
 				ProductVo vo = new ProductVo(num, name, price, stock, kind, disconut, artist, explain, best, image, discountRate);
+				System.out.println(vo);
 				list.add(vo);
 			}
 			return list;

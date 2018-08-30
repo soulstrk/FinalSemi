@@ -183,12 +183,22 @@ function sendCart(){
     <dd>${vo.p_price} won</dd>
     
 </dl>
+
 <dl class="first_box">
 
     <dt>작가명</dt>
     <dd>${vo.p_artist} 작가</dd>
 
 </dl>
+
+
+<dl class="first_box">
+
+    <dt>수량</dt>
+    <dd>${vo.p_stock}개</dd>
+
+</dl>
+
 
 <form name="form" method="get">
 수량 : <input type="hidden" name="sell_price" value="${vo.p_price}">
