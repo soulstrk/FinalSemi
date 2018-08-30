@@ -25,7 +25,6 @@ public class PaintingController extends HttpServlet{
 	
 	@Override
 	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 		String cmd = request.getParameter("cmd");
 		

@@ -8,9 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import jyi.dao.CustomerBoardDao;
 import jyi.vo.CustomerBoardVo;
@@ -25,6 +23,7 @@ public class CustomerBoardController extends HttpServlet {
 		String cmd = request.getParameter("cmd");
 		if (cmd.equals("index")) {
 			response.sendRedirect("index.jsp");
+			return;
 		} else if (cmd.equals("list")) {
 			list(request, response);
 		} else if (cmd.equals("info")) {
@@ -60,6 +59,7 @@ public class CustomerBoardController extends HttpServlet {
 		String find=request.getParameter("find");
 		if(select !=null && !select.equals("") && find !=null && !find.equals("") ) {
 			find(request,response);
+			return;
 		}
 		String spageNum=request.getParameter("pageNum");
 		int pageNum=1;

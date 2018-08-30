@@ -29,6 +29,7 @@ public class MyPageController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("asd");
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
 		if(cmd.equals("index")) {

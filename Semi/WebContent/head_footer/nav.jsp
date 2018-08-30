@@ -81,6 +81,7 @@
 					 $('#searchForm').css('left','655px'); 
 					 $('img[src="images/hd_logo.png"]').css('left','150px'); 
 					 $('#myPage').css('left','580px');
+					 $('#live').css('left','410px');
 				})
 			</script>
 		<%
@@ -90,19 +91,25 @@
 		<% }} %>
       </li>
       <li class="nav-item active">
-        <a class="navbar-brand" href="index.jsp?content1=mainPage.jsp"><img src="images/hd_logo.png" style="width: 223px; height: 45px; position: relative; left: 250px; padding-bottom: 0px;"></a>
+        <a class="navbar-brand" href="../mainList.do"><img src="images/hd_logo.png" style="width: 223px; height: 45px; position: relative; left: 250px; padding-bottom: 0px;"></a>
+      </li>
+      <li class="nav-item active" style="position: relative; left: 350px; width: 120px;" id="live">
+        <a class="navbar-brand" href="#"><img alt="" src="" class="rounded-circle" id="liveImage" style="width: 90px; height: 90px;"></a>
+      </li>
+      <li class="nav-item active" style="position: relative; left: 350px; width: 120px;" id="live">
+        <span id="liveSpan"></span>
       </li>
       <li class="nav-item active" id="myPage">
         <a class="nav-link" href="mypage.do?cmd=info&id=<%=id%>&info=mypage&date=x&date1=0&date2=0"><b>My page</b></a>
       </li>
       <li class="nav-item active">
-        <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 755px;" method="post" action="search.do?pageNum=1">
-	      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" id="searchP" onkeyup="searchW()">
+        <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 555px;" method="post" action="search.do?pageNum=1">
+	      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" id="searchP" onkeyup="searchW()" autocomplete=off>
 	      <button class="btn" type="submit"><img src="images/magnifier.png"></button>
 	    </form>
       </li>
     </ul>
-    <div style="background-color:black; color: white; border: 1px solid red; position: relative; left: 480px; top:260px; width: 300px; z-index: 1; height: 500px; display: none;" id="testing"></div>
+    <div style="background-color:white; color: black; border: 1px solid; position: relative; left: 500px; top:280px; width: 240px; z-index: 1; height: 500px; display: none; overflow: scroll; font-family: 'Nanum Gothic', serif; font-weight: bold;" id="testing"></div>
   </div>
 </nav>
 
@@ -138,32 +145,61 @@
 	  </div>
 	</div>
 	
+	
 <script type="text/javascript">
-		function searchW() {
-			 var word = $('#searchP').val();
-			 if(word == ""){
-				 return;
-			 }
-			 $('#testing').css('display','block');
-			$.ajax({
-				url : "searchWord.do?cmd=1&word="+word,
-				dataType : 'json',
-				success: function(data) {
-					if(data.msg == 1){
-						alert('여기');
-						return;
-					}else{
-						$('#testing').text(' ');
-						for (var i = 0; i < data.list.length; i++) {
-							var pNum = data.list[i].pNum;
-							var pName = data.list[i].pName;
-							var pPrice = data.list[i].pPrice;
-							$('#testing').append('<span>'+pNum+''+pName+'</span><br>');
-						}
-					}
+
+var cnt = 3;
+setInterval(function() {
+	$(document).ready(function liveSearch() {
+		$.ajax({
+			url : 'live_search.do',
+			dataType : 'json',
+			Type : 'post',
+			success: function(data) {
+					cnt = cnt % 3;
+					var pNum = data.liveList[cnt].pNum;
+					var pImage = data.liveList[cnt].pImage;
+					var pName = data.liveList[cnt].pName;
+					$('#liveImage').attr('src','pImages/'+pImage);
+					$('#liveSpan').html('<h3>'+(cnt+1)+'</h3><a href="opainting.do?cmd=detail&p_num='+pNum+'" style="font-size:25px;">'+pName+'</a>');
+					cnt++;
 				}
 			});
+		})
+}, 2000)
+
+
+function draw(msg) {
+	$('.test').text(msg);
+}
+
+function searchW() {
+	 var word = $('#searchP').val();
+	 if(word == ""){
+		 $('#testing').css('display','none');
+		 return;
+	 }
+	 $('#testing').css('display','block');
+	 $.ajax({
+		url : "searchWord.do?cmd=1&word="+word,
+		dataType : 'json',
+		success: function(data) {
+			if(data.msg == 1){
+				return;
+			}else{
+				$('#testing').text(' ');
+				for (var i = 0; i < data.list.length; i++) {
+					var pNum = data.list[i].pNum;
+					var pName = data.list[i].pName;
+					var pPrice = data.list[i].pPrice;
+					var pImage = data.list[i].pImage;
+					$('#testing').append('<a href="opainting.do?cmd=detail&p_num='+pNum+'">'+pName+' &nbsp&nbsp;&nbsp;&nbsp;'+pPrice+'원</a><br>');
+					$('#testing').append('<img src=pImages/'+pImage+' style="width:180px; height:140px;"><br><br>');
+				}
+			}
 		}
+	});
+}
 </script>	
 	
 

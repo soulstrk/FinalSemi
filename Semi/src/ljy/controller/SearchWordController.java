@@ -36,7 +36,7 @@ public class SearchWordController extends HttpServlet{
 			PrintWriter pw = response.getWriter();
 			JSONObject json = new JSONObject();
 			json.put("msg", -1);
-			System.out.println(json.toString());
+			pw.println(json.toString());
 			pw.close();
 		}else {
 			PrintWriter pw = response.getWriter();
@@ -47,6 +47,7 @@ public class SearchWordController extends HttpServlet{
 				json.put("pNum", list.get(i).getpNum());
 				json.put("pName", list.get(i).getpName());
 				json.put("pPrice", list.get(i).getpPrice());
+				json.put("pImage", list.get(i).getpImage());
 				jArr.add(json);
 			}
 			JSONObject obj = new JSONObject();

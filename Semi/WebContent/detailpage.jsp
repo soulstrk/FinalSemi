@@ -3,10 +3,6 @@
     pageEncoding="UTF-8"%>
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <c:if test="${!empty cartMsg }">
 <script type="text/javascript">
@@ -58,10 +54,9 @@ a{
 }
 
 .right_centainer{
-
 	width:500px;
 	height: 490px;
-	margin: 26px 600px 0 0;
+	margin: 26px 650px 0 0;
 	float:right;
 }
 
@@ -124,23 +119,21 @@ function change () {
 
 
 function sendorderpage(){
-	
 	var price=document.getElementsByName("sum")[0].value;
 	var amount= document.form.amount.value; // 폼에 있으면 이런식으로도 가능하다.
 	var sprice =(price*0.2);
 	location.href="index.jsp?content1=orderpage.jsp&p_name=${vo.p_name}&p_price=${vo.p_price}&p_partist=${vo.p_artist}&p_img=${vo.p_image}&sprice="+sprice+"&price="+price+"&amount="+amount;
-	
-
-	
-
 }
 
 
 function sendCart(){
-	
 	var amount= document.form.amount.value; // 폼에 있으면 이런식으로도 가능하다.
+	<% if(session.getAttribute("id") != null){ %>
 	location.href="cart.do?cmd=insert&c_p_num=${vo.p_num}&amount="+amount;
-
+	<% }else { %>
+	alert('로그인 후에 이용 가능합니다.');
+	return;
+	<% } %>
 }
 </script>
 
@@ -229,7 +222,7 @@ function sendCart(){
 		
 		<div class="thumb-wrap">
 		
-			<div class="thumb" style="margin-left: 564px; width:450px;">
+			<div class="thumb" style="margin-left: 511px; width:450px;">
 				
 					<div class="thumb-container">
 					
