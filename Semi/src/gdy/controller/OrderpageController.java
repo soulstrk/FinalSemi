@@ -59,8 +59,8 @@ public class OrderpageController extends HttpServlet {
 		OrderDao dao = OrderDao.getInstance();
 		
 		
-		/*int n =dao.order(vo,p_num,plus_point,minus_point);
-		System.out.println(n);*/
+		int n =dao.order(vo,p_num,plus_point,minus_point);
+		System.out.println(n);
 		
 		response.sendRedirect("index.jsp?content1=mainPage.jsp");
 		

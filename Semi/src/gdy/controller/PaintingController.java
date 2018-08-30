@@ -52,8 +52,6 @@ public class PaintingController extends HttpServlet{
 		String spageNum = request.getParameter("pageNum");//null
 		String p_kinds = request.getParameter("p_kind");
 		
-		System.out.println("p_kind:"+p_kinds);
-		
 		int pageNum=1; //페이지를 기본으로 1로
 		if(spageNum != null) {
 			

@@ -49,7 +49,7 @@
 				<c:forEach var="vo" items="${list }">
 				<tr>
 					<td id="list">${vo.pName}</td>
-					<td><img src="pImages/${vo.pImage }" alt="${vo.pName }" style="width: 150px;"></td>
+					<td><img src="painting/o/${vo.pImage }" alt="${vo.pName }" style="width: 150px;"></td>
 					<td id="list">${vo.pPrice } 원</td>
 					<td id="list">${vo.pStock } 개</td>
 					<td id="list">${vo.pKind }</td>
