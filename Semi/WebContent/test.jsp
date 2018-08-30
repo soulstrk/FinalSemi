@@ -160,8 +160,8 @@ dl, ul, ol, menu, li {
 	
 		<div class="category-list-container">
 		
-			<span><a href="opainting.do?cmd=oriental">서양화</a></span>
-			<span><a href="">동양화</a></span>
+			<span><a href="opainting.do?cmd=oriental&p_kind=서양화">서양화</a></span>
+			<span><a href="opainting.do?cmd=oriental&p_kind=동양화">동양화</a></span>
 		</div>
 	
 	
@@ -196,6 +196,7 @@ dl, ul, ol, menu, li {
 		<!--  상세페이지로 가는 곳!!!! -->
 		
 		
+
 	<a href="opainting.do?cmd=detail&p_num=${vo.p_num}"><img class="card-img-top" src="painting/o/${vo.p_image}" alt=""></a>
 		</div>
 	
@@ -257,7 +258,7 @@ dl, ul, ol, menu, li {
 			<c:when test="${i==pageNum}">
 			
 				<a href="opainting.do?cmd=oriental&pageNum=${i}
-				&search=${param.search}&keyword=${param.keyword}">
+				&search=${param.search}&keyword=${param.keyword}&p_kind=${p_kinds}">
 				
 					<span>[${i}]</span>
 				
@@ -266,7 +267,7 @@ dl, ul, ol, menu, li {
 			<c:otherwise>
 			
 				<a href="opainting.do?cmd=oriental&pageNum=${i}
-				&search=${param.search}&keyword=${param.keyword}">
+				&search=${param.search}&keyword=${param.keyword}&p_kind=${p_kinds}">
 				
 					<span>[${i}]</span>
 				

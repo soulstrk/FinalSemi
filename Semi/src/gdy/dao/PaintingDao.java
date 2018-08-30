@@ -66,7 +66,7 @@ public class PaintingDao {
 		
 	}
 	
-	public int getCount(String search, String keyword) {
+	public int getCount(String search, String keyword,String p_kinds) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -78,7 +78,7 @@ public class PaintingDao {
 		if(keyword == null) {
 			
 			
-			String sql = "select NVL(count(p_num),0) maxnum from products";
+			String sql = "select NVL(count(p_num),0) maxnum from products where p_kind='"+p_kinds+"' order by p_num desc";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -95,7 +95,7 @@ public class PaintingDao {
 				
 			}
 			
-				String sql = "select NVL(count(p_num),0) maxnum from products";
+			String sql = "select NVL(count(p_num),0) maxnum from products where p_kind='"+p_kinds+"' order by p_num desc";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 			
@@ -122,7 +122,7 @@ public class PaintingDao {
 		
 	}
 	
-	public ArrayList<PaintingVo> list(int startRow, int endRow, String search, String keyword){
+	public ArrayList<PaintingVo> list(int startRow, int endRow, String search, String keyword,String p_kinds){
 		
 		Connection con = DBConnection.getConn();
 		PreparedStatement pstmt = null;
@@ -131,7 +131,8 @@ public class PaintingDao {
 		
 		try {
 			
-			if(search == null) {
+			if(search == "" || keyword == "" || search == null || keyword == null) {
+				System.out.println("if¹®½ÇÇà");
 				String sql =
 						
 						"select *from"+
@@ -139,7 +140,7 @@ public class PaintingDao {
 						"select AA.*, rownum rnum from"+
 						"("+
 						"select *from products "+
-						"order by p_num desc"+
+						"where p_kind='"+p_kinds+"' order by p_num desc"+
 						")AA"+
 						")where rnum>=? and rnum<=?";
 				
