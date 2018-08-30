@@ -28,6 +28,8 @@ public class OrderpageController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String o_id = (String)session.getAttribute("id");
 		
+		System.out.println("세션아이디:"+o_id);
+		
 		//총수량, 결제 금액
 		int o_amount =  Integer.parseInt(request.getParameter("amount")); //총수량
 		int o_payment =  Integer.parseInt(request.getParameter("p_price1")); // 결제 금액
@@ -48,7 +50,11 @@ public class OrderpageController extends HttpServlet {
 		String o_addr = addr1[0]+addr1[1]+addr1[2];
 		
 		//결제 방법 !!!!!!!! 만들어야함
-		String o_paymethod ="카카오페이";		
+		
+		String o_paymethod = request.getParameter("Payment_method");
+		
+		System.out.println(o_paymethod);
+		
 		
 		int o_state=1;
 		OrderVo vo = new OrderVo(0,o_id,null,o_addr,o_paymethod,0,o_phone,o_msg,o_payment,o_state,o_amount);
@@ -59,10 +65,10 @@ public class OrderpageController extends HttpServlet {
 		OrderDao dao = OrderDao.getInstance();
 		
 		
-		/*int n =dao.order(vo,p_num,plus_point,minus_point);
+	/*	int n =dao.order(vo,p_num,plus_point,minus_point);
 		System.out.println(n);*/
 		
-		response.sendRedirect("index.jsp?content1=mainPage.jsp");
+		/*response.sendRedirect("index.jsp?content1=mainPage.jsp");*/
 		
 		}
 		

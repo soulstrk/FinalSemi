@@ -51,10 +51,18 @@
  
  }
  
+ #Payment_method{
+ 	
+ 	border: 1px solid gray;
+ 	text-align:center;
+ 	padding: 18px 0px 0px 173px;
+ 	
+ }
+ 
  textarea {
     overflow: auto;
     resize: vertical;
-    margin-bottom: 50px;
+    
 }
 
 #button{
@@ -133,8 +141,7 @@ div{
 	String amount = request.getParameter("amount");
 	
 	
-	// 세션 아이디 담기
-	session.setAttribute("id", "admin");
+
 	%>
 	
 	
@@ -285,6 +292,8 @@ div{
 		
 		
 	}
+	
+
 	
 	
 	
@@ -478,11 +487,27 @@ div{
 		<!-- 주소와 우편번호를 입력할 <input>들을 생성하고 적당한 name과 class를 부여한다 -->
 		
 		
+	</div>
+	
+		<div class="row">
+	
+	
+		<div class="col-lg-12" id="order_imformaion"><h5>결제 정보 입력</h5></div>
 		
-		
-		
-		
-		
+		<div class="col-lg-12" id="order_imformaion">[Payment method]</div>
+
+	</div>
+	
+	
+	<div class="row"  id="Payment_method">
+	
+		<div class="col-lg-2"><input type="radio" name="Payment_method" value="카카오페이">카카오페이</div>
+		<div class="col-lg-2"><input type="radio" name="Payment_method" value="신용카드">신용카드</div>
+		<div class="col-lg-2"><input type="radio" name="Payment_method" value="계좌이체">계좌이체</div>
+		<div class="col-lg-2"><input type="radio" name="Payment_method" value="무통장">무통장</div>
+		<div class="col-lg-2"><input type="radio" name="Payment_method" value="핸드폰결제">핸드폰 결제</div>
+	
+	
 	</div>
 	
 	

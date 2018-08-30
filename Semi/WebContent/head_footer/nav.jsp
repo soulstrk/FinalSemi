@@ -194,7 +194,7 @@ function searchW() {
 					var pPrice = data.list[i].pPrice;
 					var pImage = data.list[i].pImage;
 					$('#testing').append('<a href="opainting.do?cmd=detail&p_num='+pNum+'">'+pName+' &nbsp&nbsp;&nbsp;&nbsp;'+pPrice+'원</a><br>');
-					$('#testing').append('<img src=pImages/'+pImage+' style="width:180px; height:140px;"><br><br>');
+					$('#testing').append('<img src="painting/o/'+pImage+'" style="width:180px; height:140px;"><br><br>');
 				}
 			}
 		}
