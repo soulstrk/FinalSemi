@@ -157,7 +157,7 @@ public class CartController extends HttpServlet {
 				request.setAttribute("cartMsg", "success");
 				request.getRequestDispatcher("opainting.do?cmd=detail&p_num="+pNum).forward(request, response);
 			}else {
-				response.sendRedirect("index.jsp?content1=cartOk.jsp");
+				response.sendRedirect("mainList.do");
 			}
 		}else if(dao.productDupliChk(id, pNum) == 1) {
 			int w = dao.insert(id, pNum, amount);
@@ -166,7 +166,7 @@ public class CartController extends HttpServlet {
 				request.setAttribute("cartMsg", "success");
 				request.getRequestDispatcher("opainting.do?cmd=detail&p_num="+pNum).forward(request, response);
 			}else {
-				response.sendRedirect("index.jsp?content1=cartOk.jsp");
+				response.sendRedirect("mainList.do");
 			}
 		}
 	}

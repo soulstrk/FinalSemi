@@ -27,7 +27,10 @@ function getViewInfo(){
 				a.className="w3-bar-item w3-button";
 				a.href="opainting.do?cmd=detail&p_num="+json[i].p_num;	
 				var img=document.createElement("img");
-				img.src=p_image;
+				img.src="painting/o/"+p_image;
+				img.width="500";
+				img.height="500";
+				
 				a.appendChild(img);
 				var div=document.createElement("div");
 				div.innerHTML=p_name;
@@ -135,28 +138,47 @@ function getDate(e){
 		date1.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
 		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
 	}else if(e=="btn2"){ //1주일
-		if((d.getMonth()+1) <10){
-			z="0";
-		}
-		date1.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+(d.getDate()-7);
+		if((d.getMonth()+1) <10) z="0";
+		var d1=new Date(d.getFullYear(),d.getMonth()+1,d.getDate()-7);
+		date1.value=d1.getFullYear()+"-"+z+(d1.getMonth())+"-"+(d1.getDate());
 		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
 	}else if(e=="btn3"){ //1개월
-		if((d.getMonth()+1) <10){
-			z="0";
-		}
-		date1.value=d.getFullYear()+"-"+z+d.getMonth()+"-"+(d.getDate());
+		if((d.getMonth()+1) <10) z="0";
+		var d1=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+		date1.value=d1.getFullYear()+"-"+z+d1.getMonth()+"-"+(d1.getDate());
 		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
 	}else if(e=="btn4"){ //3개월
-		if((d.getMonth()+1) <10){
-			z="0";
-		}
-		date1.value=d.getFullYear()+"-"+z+(d.getMonth()-2)+"-"+(d.getDate());
+		if((d.getMonth()+1) <10) z="0";
+		var d1=new Date(d.getFullYear(),d.getMonth()-2,d.getDate());
+		date1.value=d1.getFullYear()+"-"+z+d1.getMonth()+"-"+(d1.getDate());
 		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
 	}else if(e=="btn5"){ //6개월
-		if((d.getMonth()+1) <10){
-			z="0";
+		if((d.getMonth()+1) <10) z="0";
+		var gd=d.getDate();
+		var g=1;
+		//윤년계산
+		if((d.getFullYear()%4==0 && d.getFullYear()%100!=0) || d.getFullYear()%400==0){
+			if(d.getMonth()-5==2){ //2월
+				if(gd==30){ 
+					gd=d.getDate()-1; //29일
+				}else if(gd==31){
+					gd=d.getDate()-2; //29일
+				}
+			} 
 		}
-		date1.value=d.getFullYear()+"-"+z+(d.getMonth()-5)+"-"+(d.getDate());
+		//윤년 아닐 때 
+		if(d.getMonth()-5==2){ //2월
+			if(gd==29){
+				gd=d.getDate()-1; //28일
+			}else if(gd==30){
+				gd=d.getDate()-2; //28일
+			}else if(gd==31){
+				gd=d.getDate()-3; //28일
+			}
+		} 
+			
+		var d1=new Date(d.getFullYear(),d.getMonth()-5,gd);
+		date1.value=d1.getFullYear()+"-"+z+(d1.getMonth())+"-"+(d1.getDate());
 		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
 	}
 }

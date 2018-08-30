@@ -21,7 +21,6 @@ public class PointCheck extends HttpServlet{
 		
 		String cmd = request.getParameter("cmd");
 		
-		System.out.println(cmd);
 		if(cmd.equals("cpoint")) {
 			
 			OrderDao dao = OrderDao.getInstance();

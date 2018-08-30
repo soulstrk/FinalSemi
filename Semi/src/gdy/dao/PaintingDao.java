@@ -124,7 +124,6 @@ public class PaintingDao {
 	
 	public ArrayList<PaintingVo> list(int startRow, int endRow, String search, String keyword){
 		
-		System.out.println("startRow:"+startRow+"endRow:"+endRow);
 		Connection con = DBConnection.getConn();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -133,7 +132,6 @@ public class PaintingDao {
 		try {
 			
 			if(search == null) {
-				System.out.println("if문실행");
 				String sql =
 						
 						"select *from"+
@@ -157,7 +155,6 @@ public class PaintingDao {
 				
 			}else {
 				
-				System.out.println("else문실행");
 
 
 				String sql =
