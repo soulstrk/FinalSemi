@@ -273,7 +273,6 @@ function sendCart(){
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<% String id = (String)session.getAttribute("id"); %>
 		<% if(id != null){ %> 
 			<input type="text" placeholder="상품후기를 입력해주세요." id="com" style="width: 400px;"><button type="button" onclick="comInsert()">입력</button>
 		<% } else{	%>
