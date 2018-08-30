@@ -25,11 +25,9 @@ public class PaintingController extends HttpServlet{
 	
 	@Override
 	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 		String cmd = request.getParameter("cmd");
 		
-		System.out.println("cmd의값은="+cmd);
 		
 		if(cmd.equals("oriental")) {
 			olist(request,response);
@@ -62,7 +60,6 @@ public class PaintingController extends HttpServlet{
 			pageNum=Integer.parseInt(spageNum);
 		}
 		
-		System.out.println(" "+search+" "+keyword+" "+pageNum);
 		
 		
 		
@@ -79,14 +76,12 @@ public class PaintingController extends HttpServlet{
 			
 			//페이지 갯수 구하기 필요한거 ? 전체글의 갯수 / 페이지 행의 총 갯수 Math.ceil로 올림처리해야
 			int pageCount = (int)(Math.ceil(dao.getCount(search,keyword,p_kinds)/12.0));
-			System.out.println(pageCount);
 			
 			// 시작페이지 구하기
 			int startPageNum = ((pageNum-1)/5*5)+1;
 			
 			int endPageNum = startPageNum+4;
 			
-			System.out.println("전체:"+pageCount+"시작페이지:"+startPageNum+"끝페이지:"+endPageNum);
 			
 			
 			if(endPageNum>pageCount) {

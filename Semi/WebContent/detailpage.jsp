@@ -3,11 +3,7 @@
     pageEncoding="UTF-8"%>
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
+ <% String id=(String)session.getAttribute("id");%>
 <c:if test="${!empty cartMsg }">
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -61,7 +57,7 @@ a{
 
 	width:500px;
 	height: 490px;
-	margin: 26px 600px 0 0;
+	margin: 26px 650px 0 0;
 	float:right;
 }
 
@@ -81,7 +77,7 @@ a{
 
 </style>
 
-	<script language="JavaScript">
+<script type="text/javascript">
 
 var sell_price;
 var amount;
@@ -129,18 +125,17 @@ function sendorderpage(){
 	var amount= document.form.amount.value; // 폼에 있으면 이런식으로도 가능하다.
 	var sprice =(price*0.2);
 	location.href="index.jsp?content1=orderpage.jsp&p_num=${vo.p_num}&p_name=${vo.p_name}&p_price=${vo.p_price}&p_partist=${vo.p_artist}&p_img=${vo.p_image}&sprice="+sprice+"&price="+price+"&amount="+amount;
-	
-
-	
-
 }
 
 
 function sendCart(){
-	
 	var amount= document.form.amount.value; // 폼에 있으면 이런식으로도 가능하다.
+	<% if(session.getAttribute("id") != null){ %>
 	location.href="cart.do?cmd=insert&c_p_num=${vo.p_num}&amount="+amount;
-
+	<% }else { %>
+	alert('로그인 후에 이용 가능합니다.');
+	return;
+	<% } %>
 }
 </script>
 
@@ -205,7 +200,7 @@ function sendCart(){
 <input type="text" name="amount" value="1" size="3" onchange="change();">
 <input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><br>
 
-금액 : <input type="text" name="sum" size="11" readonly="">원
+금액 : <input type="text" name="sum" size="11" readonly="readonly">원
 </form>
 
 
@@ -239,7 +234,7 @@ function sendCart(){
 		
 		<div class="thumb-wrap">
 		
-			<div class="thumb" style="margin-left: 564px; width:450px;">
+			<div class="thumb" style="margin-left: 511px; width:450px;">
 				
 					<div class="thumb-container">
 					
@@ -288,7 +283,6 @@ function sendCart(){
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<% String id = (String)session.getAttribute("id"); %>
 		<% if(id != null){ %> 
 			<input type="text" placeholder="상품후기를 입력해주세요." id="com" style="width: 400px;"><button type="button" onclick="comInsert()">입력</button>
 		<% } else{	%>
@@ -302,7 +296,32 @@ function sendCart(){
 
 	$(document).ready(function() {
 		getList();
+		insertv();
 	})
+	
+<%	
+	if(id!=null){
+%>		
+	var xhr=null;
+	function insertv(){
+		xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=insertView;
+		xhr.open('get','cart.do?cmd=insertView&id=<%=id%>&p_num=${vo.p_num}',true);
+		xhr.send();
+	};	
+	
+	function insertView(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var data=xhr.responseText;
+			var json=JSON.parse(data);
+			if(json.n>0){
+				return;
+			}
+		}		
+	}
+<%	
+	}
+%>
 	
 	function getList() {
 		$.ajax({

@@ -29,6 +29,7 @@ public class MyPageController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("asd");
 		request.setCharacterEncoding("utf-8");
 		String cmd=request.getParameter("cmd");
 		if(cmd.equals("index")) {
@@ -90,7 +91,6 @@ public class MyPageController extends HttpServlet {
 		ArrayList<OrderVo> list=dao.getLatelyOrder(id);
 		for(OrderVo ordervo : list) {
 			int n=ordervo.getO_state();
-			System.out.println(n);
 			switch(n) {
 			case -1: state0 = state0 +1; break;
 			case 1: state1 = state1 +1; break;
@@ -349,9 +349,9 @@ public class MyPageController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String id=request.getParameter("id");	
-		int adminOk=Integer.parseInt(request.getParameter("adminOk"));
+		int comments_num=Integer.parseInt(request.getParameter("comments_num"));
 		MyPageDao dao=MyPageDao.getInstance();
-		int n=dao.reviewDelete(id,adminOk);
+		int n=dao.reviewDelete(id,comments_num);
 		String resultMsg="";
 		if(n>0) {
 			resultMsg="해당 상품후기가 삭제되었습니다.";
@@ -361,4 +361,9 @@ public class MyPageController extends HttpServlet {
 		request.setAttribute("resultMsg", resultMsg);
 		request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
 	}
+	
+	
+	
+	
+	
 }

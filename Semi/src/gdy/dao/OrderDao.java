@@ -35,7 +35,6 @@ public class OrderDao {
 			
 			if(rs.next()) {
 				int aa = rs.getInt("point");
-				System.out.println(aa);
 				return aa;
 			}
 			
@@ -103,7 +102,6 @@ public class OrderDao {
 				pstmt2.setInt(2, minus_point);
 				pstmt2.executeUpdate();
 				
-				System.out.println("성공");
 				return n;
 				
 				
@@ -112,7 +110,6 @@ public class OrderDao {
 				String rollback="rollback";
 				pstmt = con.prepareStatement(rollback);
 				pstmt.executeUpdate();
-				System.out.println("실패");
 				
 				return -1;
 			}

@@ -22,7 +22,6 @@ public class OrderpageController extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 
 		//세션 아이디
@@ -36,7 +35,6 @@ public class OrderpageController extends HttpServlet {
 		int p_num = Integer.parseInt(request.getParameter("p_num")); // 상품 번호
 		int minus_point = Integer.parseInt(request.getParameter("mpoint"));//사용한 포인트
 		
-		System.out.println("p"+p_num);
 	
 		
 		String[] phone = request.getParameterValues("phone");	// 폰번호

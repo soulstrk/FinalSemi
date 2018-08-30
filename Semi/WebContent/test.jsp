@@ -7,9 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<!-- 부트스트랩  -->
-
-
 <style type="text/css">
 
 .SMP-container {
@@ -199,7 +196,8 @@ dl, ul, ol, menu, li {
 		<!--  상세페이지로 가는 곳!!!! -->
 		
 		
-	<a href="opainting.do?cmd=detail&p_num=${vo.p_num}"><img class="card-img-top" src="/painting/o/${vo.p_image}" alt=""></a>
+
+	<a href="opainting.do?cmd=detail&p_num=${vo.p_num}"><img class="card-img-top" src="painting/o/${vo.p_image}" alt=""></a>
 		</div>
 	
 	

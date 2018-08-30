@@ -124,7 +124,6 @@ public class PaintingDao {
 	
 	public ArrayList<PaintingVo> list(int startRow, int endRow, String search, String keyword,String p_kinds){
 		
-		System.out.println("startRow:"+startRow+"endRow:"+endRow);
 		Connection con = DBConnection.getConn();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -157,7 +156,6 @@ public class PaintingDao {
 				
 			}else {
 				
-				System.out.println("else¹®½ÇÇà");
 
 
 				String sql =

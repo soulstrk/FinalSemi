@@ -32,6 +32,7 @@ public class CartController extends HttpServlet {
 
 		if (cmd.equals("index")) {
 			response.sendRedirect("index.jsp");
+			
 		} else if (cmd.equals("cart")) {
 			cart(request, response);
 		} else if (cmd.equals("delete")) {
@@ -42,7 +43,9 @@ public class CartController extends HttpServlet {
 			insert(request, response);
 		} else if(cmd.equals("view")) {
 			view(request, response);
-		} 
+		} else if(cmd.equals("insertView")) {
+			insertView(request, response);
+		}
 
 	}
 
@@ -54,6 +57,7 @@ public class CartController extends HttpServlet {
 		if (id == null || id.equals("null")) {
 			request.setAttribute("resultMsg", "로그인 후 이용가능한 페이지입니다.");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
+			return;
 		}
 		CartDao dao = CartDao.getInstance();
 		ArrayList<CartVo> list = dao.getCart(id); // 장바구니 정보
@@ -109,7 +113,6 @@ public class CartController extends HttpServlet {
 	protected void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String id=request.getParameter("id");
-		System.out.println(id);
 		CartDao dao=CartDao.getInstance();
 		ArrayList<ViewsVo> list=dao.getView(id);
 		if(list==null) {
@@ -125,10 +128,10 @@ public class CartController extends HttpServlet {
 		ArrayList<ProductsVo> plist=dao.getProducts(cartlist);
 		JSONArray arr=new JSONArray();
 		for(ProductsVo pv:plist) {
-			System.out.println(pv.getP_name());
 			JSONObject obj=new JSONObject();
 			obj.put("p_name", pv.getP_name());
 			obj.put("p_image", pv.getP_image());
+			obj.put("p_num", pv.getP_num());
 			arr.add(obj);
 		}
 		response.setContentType("text/plain;charset=utf-8");
@@ -156,7 +159,7 @@ public class CartController extends HttpServlet {
 				request.setAttribute("cartMsg", "success");
 				request.getRequestDispatcher("opainting.do?cmd=detail&p_num="+pNum).forward(request, response);
 			}else {
-				response.sendRedirect("index.jsp?content1=cartOk.jsp");
+				response.sendRedirect("mainList.do");
 			}
 		}else if(dao.productDupliChk(id, pNum) == 1) {
 			int w = dao.insert(id, pNum, amount);
@@ -165,8 +168,26 @@ public class CartController extends HttpServlet {
 				request.setAttribute("cartMsg", "success");
 				request.getRequestDispatcher("opainting.do?cmd=detail&p_num="+pNum).forward(request, response);
 			}else {
-				response.sendRedirect("index.jsp?content1=cartOk.jsp");
+				response.sendRedirect("mainList.do");
 			}
 		}
 	}
+	
+	//최근본상품 view테이블에 저장
+		protected void insertView(HttpServletRequest request, 
+				HttpServletResponse response) throws ServletException, IOException {
+			request.setCharacterEncoding("utf-8");
+			String id=request.getParameter("id");
+			int p_num=Integer.parseInt(request.getParameter("p_num"));
+			ViewsVo vo=new ViewsVo(0, id, p_num, 0);
+			CartDao dao=CartDao.getInstance();
+			int n=dao.insertView(vo);
+			response.setContentType("text/plain;charset=utf-8");
+			JSONObject json=new JSONObject();
+			json.put("n", n);
+			PrintWriter pw=response.getWriter();
+			pw.println(json.toString());
+			pw.close();
+		}
+	
 }

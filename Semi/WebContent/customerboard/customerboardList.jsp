@@ -4,10 +4,6 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <%
 	String id = (String) session.getAttribute("id");
@@ -21,13 +17,19 @@
 	}
 %>
 <title>FAQ</title>
-<div class="container">
+<div class="container" style="margin-bottom: 250px;">
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<h2>FAQ</h2><br>
+			<h2>FAQ</h2>
+			<div style="bottom:10px;float:right;">
+				<form action="customerboard.do?cmd=write" method="post"> 
+				<input type="submit" value="write" style="float:left;">
+				</form>
+			</div>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-1">
+		</div>
 </div>
 <div class="row">
 <div class="col-md-1"></div>
@@ -77,17 +79,11 @@
 
 <div class="row">
 <div class="col-md-1"></div>
-<div class="col-md-1">
-<!--  <div style="float:left;">-->
-<form action="customerboard.do?cmd=write" method="post"> 
-	<input type="submit" value="write" style="float:left;">
-</form>
-</div>
-<!-- </div>-->
+
 <div class="col-md-9">
 <form action="customerboard.do?cmd=list" method="post">
 
-<div>
+<div style="left:50px;">
 <ul class="pagination">
     <li class="page-item">
 	    <c:choose>
@@ -116,7 +112,7 @@
     </li>
   </ul>
   </div>
-<div style="float: right; position: relative; bottom: 45px;left: -30px;">
+<div style="float: right; position: relative; bottom: 45px; left:100px;">
 <select name="select">
 	<option value="id" selected="selected">ID</option>
 	<option value="title">Title</option>
