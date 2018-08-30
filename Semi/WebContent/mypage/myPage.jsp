@@ -11,10 +11,16 @@ ul {
 	list-style: none;
 	text-align: center;
 }
+
 </style>
 <div class="container" style="margin-bottom: 441px;">
 <div class="row">
-	<h2>MY PAGE</h2><br>
+	<br>
+	<br>
+	<br>
+</div>
+<div class="row">
+	<h2>MY PAGE</h2>
 </div>
 
 <div class="row">
@@ -24,7 +30,7 @@ ul {
 		<%
 			String id = (String) session.getAttribute("id");
 		%>
-		<table class="table table-hover">
+		<table class="table table-hover" style="width:100%; height:200px;">
 			<tr>
 				<th colspan="4">나의 주문처리 현황</th>
 			</tr>
@@ -102,7 +108,7 @@ ul {
 
 <div class="row" >
 	<div class="col-md-6">
-		<table class="table table-hover">
+		<table class="table table-hover" style="height:100px;">
 			<tr>
 				<th><a href="mypage.do?cmd=orderlist&id=${id }"> <span
 						style="size: 50; color: black;">ORDER</span><br> <span
@@ -110,7 +116,7 @@ ul {
 				</a></th>
 			</tr>
 		</table>
-		<table class="table table-hover">
+		<table class="table table-hover" style="height:100px;">
 			<tr>
 				<th><a href="mypage.do?cmd=pointlist&id=${id }"> <span
 						style="size: 50; color: black;">POINT</span><br> <span
@@ -118,7 +124,7 @@ ul {
 				</a></th>
 			</tr>
 		</table>
-		<table class="table table-hover">
+		<table class="table table-hover" style="height:100px;">
 			<tr>
 				<th><a href="mypage.do?cmd=customerboardlist&id=${id }"> <span
 						style="size: 50; color: black;">FAQ</span><br> <span
@@ -128,7 +134,7 @@ ul {
 		</table>
 	</div>
 	<div class="col-md-6">
-		<table class="table table-hover">
+		<table class="table table-hover" style="height:100px;">
 			<tr>
 				<th><a href="mypage.do?cmd=info&id=${id }&info=info"> <span
 						style="size: 50; color: black;">INFO</span><br> <span
@@ -136,7 +142,7 @@ ul {
 				</a></th>
 			</tr>
 		</table>
-		<table class="table table-hover">
+		<table class="table table-hover" style="height:100px;">
 			<tr>
 				<th><a href="mypage.do?cmd=update&id=${id }"> <span
 						style="size: 50; color: black;">UPDATE</span><br> <span
@@ -144,7 +150,7 @@ ul {
 				</a></th>
 			</tr>
 		</table>
-		<table class="table table-hover">
+		<table class="table table-hover" style="height:100px;">
 			<tr>
 				<th><a href="mypage.do?cmd=review&id=${id }"> <span
 						style="size: 50; color: black;">REVIEW</span><br> <span

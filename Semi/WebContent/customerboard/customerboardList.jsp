@@ -17,13 +17,19 @@
 	}
 %>
 <title>FAQ</title>
-<div class="container">
+<div class="container" style="margin-bottom: 250px;">
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<h2>FAQ</h2><br>
+			<h2>FAQ</h2>
+			<div style="bottom:10px;float:right;">
+				<form action="customerboard.do?cmd=write" method="post"> 
+				<input type="submit" value="write" style="float:left;">
+				</form>
+			</div>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-1">
+		</div>
 </div>
 <div class="row">
 <div class="col-md-1"></div>
@@ -73,17 +79,11 @@
 
 <div class="row">
 <div class="col-md-1"></div>
-<div class="col-md-1">
-<!--  <div style="float:left;">-->
-<form action="customerboard.do?cmd=write" method="post"> 
-	<input type="submit" value="write" style="float:left;">
-</form>
-</div>
-<!-- </div>-->
+
 <div class="col-md-9">
 <form action="customerboard.do?cmd=list" method="post">
 
-<div>
+<div style="left:50px;">
 <ul class="pagination">
     <li class="page-item">
 	    <c:choose>
@@ -112,7 +112,7 @@
     </li>
   </ul>
   </div>
-<div style="float: right; position: relative; bottom: 45px;left: -30px;">
+<div style="float: right; position: relative; bottom: 45px; left:100px;">
 <select name="select">
 	<option value="id" selected="selected">ID</option>
 	<option value="title">Title</option>
