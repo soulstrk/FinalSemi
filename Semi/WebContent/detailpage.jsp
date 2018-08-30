@@ -25,6 +25,7 @@
     text-align: center;
 }
 
+
 dl, ul, ol, menu, li{
     list-style: none;
 }
