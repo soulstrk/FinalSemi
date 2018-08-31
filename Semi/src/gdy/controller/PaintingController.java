@@ -12,7 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
+=======
+>>>>>>> branch 'master' of https://github.com/soulstrk/FinalSemi.git
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -34,6 +37,7 @@ public class PaintingController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String cmd = request.getParameter("cmd");
 
+<<<<<<< HEAD
 		if (cmd.equals("oriental")) {
 			olist(request, response);
 
@@ -47,6 +51,16 @@ public class PaintingController extends HttpServlet {
 
 	private void olist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+=======
+	
+	
+	
+	
+	//동양화 list를 가지고오는 부분
+	
+	protected void olist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+>>>>>>> branch 'master' of https://github.com/soulstrk/FinalSemi.git
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
 		String spageNum = request.getParameter("pageNum");// null
@@ -103,6 +117,7 @@ public class PaintingController extends HttpServlet {
 	}
 
 	////////// 세부 정보 보기
+<<<<<<< HEAD
 
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -122,6 +137,14 @@ public class PaintingController extends HttpServlet {
 				
 		String cartMsg = (String) request.getAttribute("cartMsg");
 		if (cartMsg != null) {
+=======
+	
+	
+	protected void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String cartMsg = (String)request.getAttribute("cartMsg");
+		if(cartMsg != null) {
+>>>>>>> branch 'master' of https://github.com/soulstrk/FinalSemi.git
 			request.setAttribute("cartMsg", cartMsg);
 		}
 		String p_num = request.getParameter("p_num");

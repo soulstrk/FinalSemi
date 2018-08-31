@@ -72,9 +72,14 @@ public class MyPageController extends HttpServlet {
 		if (id.equals("null") || id.equals("")) {
 			request.setAttribute("resultMsg", "로그인 후 이용가능한 페이지입니다.");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
+<<<<<<< HEAD
 				return;
 		}else {
 		
+=======
+			return;
+		}
+>>>>>>> branch 'master' of https://github.com/soulstrk/FinalSemi.git
 		MyPageDao dao = MyPageDao.getInstance();
 		MembersVo vo = dao.getInfo(id);
 		if (vo == null) {

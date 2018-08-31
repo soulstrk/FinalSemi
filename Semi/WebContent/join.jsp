@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script src="js/jy_join.js?ver=3"></script>
+<script src="js/jy_join.js?ver=10"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- join페이지  waterPaitn 자바스크립트 -->
 
 <div class="container" style="padding-left: 240px; padding-top: 80px; padding-bottom: 50px; font-family: 'Jeju Myeongjo', serif; font-size: 25px">
@@ -13,7 +13,7 @@
            <label for="id">아이디</label>
            <span style="color:red">*</span>&nbsp;&nbsp;
            <button type="button" class="btn btn-secondary" id="idcheck_btn" disabled="disabled" onclick="dupliChk()">중복검사</button>&nbsp;&nbsp;&nbsp;<span id="dupliChkSpan"></span>
-           <input type="text" class="form-control" id="id" placeholder="아이디 8~12자 영대소문자 와 숫자" name="id" onkeyup="idLiveCheck()"><img class="join_image id" src="" id="img_id">
+           <input type="text" class="form-control" id="ide" placeholder="아이디 8~12자 영대소문자 와 숫자" name="id" onkeyup="idLiveCheck()"><img class="join_image id" src="" id="img_id">
          </div>
          
          <div class="form-group form-group-custom">
