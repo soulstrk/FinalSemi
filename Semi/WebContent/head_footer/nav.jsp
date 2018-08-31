@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!-- 추가 Sidebar (최근 본 상품 5개) -->  
-<script src="js/yi_js.js?ver=1"></script>
+<script src="js/yi_js.js?ver=3"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <%	String id=(String)session.getAttribute("id"); %>
@@ -74,14 +74,16 @@
 			    <a class="dropdown-item" href="admin.do?adminNum=1&num=0">회원관리</a>
 			    <a class="dropdown-item" href="index.jsp?content1=admin/productEnroll.jsp">상품등록</a>
 			    <a class="dropdown-item" href="adminProduct.do?adminNum=3&pageNum=1">상품관리</a>
+			    <a class="dropdown-item" href="deliveryManagement.do?cmd=delivering">배송관리</a>
 			  </div>
 			</div>
 			<script type="text/javascript">
 				$(document).ready(function() {
-					 $('#searchForm').css('left','655px'); 
+					 $('#searchForm').css('left','455px'); 
 					 $('img[src="images/hd_logo.png"]').css('left','150px'); 
-					 $('#myPage').css('left','580px');
-					 $('#live').css('left','410px');
+					 $('#myPage').css('left','380px');
+					 $('.live').css('left','60px');
+					 $('#testing').css('left','170px')
 				})
 			</script>
 		<%
@@ -93,10 +95,10 @@
       <li class="nav-item active">
         <a class="navbar-brand" href="../mainList.do"><img src="images/hd_logo.png" style="width: 223px; height: 45px; position: relative; left: 250px; padding-bottom: 0px;"></a>
       </li>
-      <li class="nav-item active" style="position: relative; left: 350px; width: 120px;" id="live">
+      <li class="nav-item active" style="position: relative; left: 350px; width: 150px;" class="live">
         <a class="navbar-brand" href="#"><img alt="" src="" class="rounded-circle" id="liveImage" style="width: 90px; height: 90px;"></a>
       </li>
-      <li class="nav-item active" style="position: relative; left: 350px; width: 120px;" id="live">
+      <li class="nav-item active" style="position: relative; left: 350px; width: 150px;" class="live">
         <span id="liveSpan"></span>
       </li>
       <li class="nav-item active" id="myPage">
@@ -109,7 +111,7 @@
 	    </form>
       </li>
     </ul>
-    <div style="background-color:white; color: black; border: 1px solid; position: relative; left: 500px; top:280px; width: 240px; z-index: 1; height: 500px; display: none; overflow: scroll; font-family: 'Nanum Gothic', serif; font-weight: bold;" id="testing"></div>
+    <div style="background-color:white; color: black; border: 1px solid; position: relative; left: 270px; top:280px; width: 240px; z-index: 1; height: 500px; display: none; overflow: scroll; font-family: 'Nanum Gothic', serif; font-weight: bold;" id="testing"></div>
   </div>
 </nav>
 
@@ -156,12 +158,12 @@ setInterval(function() {
 			dataType : 'json',
 			Type : 'post',
 			success: function(data) {
-					cnt = cnt % 3;
+					cnt = cnt % data.liveList.length;
 					var pNum = data.liveList[cnt].pNum;
 					var pImage = data.liveList[cnt].pImage;
 					var pName = data.liveList[cnt].pName;
 					$('#liveImage').attr('src','painting/o/'+pImage);
-					$('#liveSpan').html('<h3>'+(cnt+1)+'</h3><a href="opainting.do?cmd=detail&p_num='+pNum+'" style="font-size:25px;">'+pName+'</a>');
+					$('#liveSpan').html('<h3>'+(cnt+1)+'위</h3><a href="opainting.do?cmd=detail&p_num='+pNum+'" style="font-size:25px;">'+pName+'</a>');
 					cnt++;
 				}
 			});
@@ -194,7 +196,7 @@ function searchW() {
 					var pPrice = data.list[i].pPrice;
 					var pImage = data.list[i].pImage;
 					$('#testing').append('<a href="opainting.do?cmd=detail&p_num='+pNum+'">'+pName+' &nbsp&nbsp;&nbsp;&nbsp;'+pPrice+'원</a><br>');
-					$('#testing').append('<img src=painting/o/'+pImage+' style="width:180px; height:140px;"><br><br>');
+					$('#testing').append('<img src="painting/o/'+pImage+'" style="width:180px; height:140px;"><br><br>');
 				}
 			}
 		}

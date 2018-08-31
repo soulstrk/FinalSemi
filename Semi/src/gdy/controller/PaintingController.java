@@ -10,6 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,7 +26,7 @@ import ljy.vo.ReviewVo;
 public class PaintingController extends HttpServlet{
 	
 	@Override
-	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String cmd = request.getParameter("cmd");
 		
@@ -45,7 +47,7 @@ public class PaintingController extends HttpServlet{
 	
 	//동양화 list를 가지고오는 부분
 	
-	private void olist(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+	protected void olist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
@@ -123,7 +125,7 @@ public class PaintingController extends HttpServlet{
 	////////// 세부 정보 보기
 	
 	
-	private void detail(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+	protected void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String cartMsg = (String)request.getAttribute("cartMsg");
 		if(cartMsg != null) {
