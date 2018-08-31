@@ -104,7 +104,7 @@
         <a class="nav-link" href="mypage.do?cmd=info&id=<%=id%>&info=mypage&date=x&date1=0&date2=0"><b>My page</b></a>
       </li>
       <li class="nav-item active">
-        <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 555px;" method="post" action="search.do?pageNum=1">
+        <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 505px;" method="post" action="search.do?pageNum=1">
 	      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" id="searchP" onkeyup="searchW()" autocomplete=off>
 	      <button class="btn" type="submit"><img src="images/magnifier.png"></button>
 	    </form>
