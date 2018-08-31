@@ -1,6 +1,7 @@
 package jyi.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import com.sun.org.apache.bcel.internal.generic.DALOAD;
 import com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator;
@@ -57,6 +61,8 @@ public class MyPageController extends HttpServlet {
 			review(request, response);
 		} else if (cmd.equals("reviewDelete")) {
 			reviewDelete(request, response);
+		} else if(cmd.equals("returnPdut")) {
+			returnPdut(request, response);
 		}
 	}
 
@@ -66,12 +72,15 @@ public class MyPageController extends HttpServlet {
 		if (id.equals("null") || id.equals("")) {
 			request.setAttribute("resultMsg", "로그인 후 이용가능한 페이지입니다.");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
-		}
+				return;
+		}else {
+		
 		MyPageDao dao = MyPageDao.getInstance();
 		MembersVo vo = dao.getInfo(id);
 		if (vo == null) {
 			request.setAttribute("resultMsg", "오류로 인해 정보를 불러들이지 못했습니다..");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
+			return;
 		}
 		String path = "myPage.jsp";
 		String info = request.getParameter("info");
@@ -119,6 +128,7 @@ public class MyPageController extends HttpServlet {
 		request.setAttribute("state5", state5); // 반품승인완료
 		request.setAttribute("vo", vo);
 		request.getRequestDispatcher("index.jsp?content1=mypage/" + path).forward(request, response);
+		}
 	}
 
 	// 마이페이지 회원정보 수정하기
@@ -176,8 +186,7 @@ public class MyPageController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String date = request.getParameter("date");
-		if (date == null || date.equals("null"))
-			date = "x";
+		if (date == null || date.equals("null")) date = "x";
 		Calendar cal = Calendar.getInstance();
 		int month = cal.get(Calendar.MONTH) + 1;
 		String startDate = "1900/01/01";
@@ -231,6 +240,9 @@ public class MyPageController extends HttpServlet {
 		int o_num = Integer.parseInt(request.getParameter("o_num"));
 		MyPageDao dao = MyPageDao.getInstance();
 		ArrayList<Integer> list = dao.getProductNum(o_num); // 주문한 상품번호배열 불러오기
+		for(Integer i:list) {
+			System.out.println(i +"???");
+		}
 		ArrayList<ProductsVo> voList = dao.getOrderInfo(list);// 주문상품별 정보 불러오기
 		OrderInfoVo vo = dao.getOrderProductInfo(o_num);// 주문정보 불러오기(상품번호,해당 수량, 지불금액)
 		if (list == null || voList == null || vo == null) {
@@ -380,4 +392,20 @@ public class MyPageController extends HttpServlet {
 		request.setAttribute("resultMsg", resultMsg);
 		request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
 	}
+	
+	protected void returnPdut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		int o_num=Integer.parseInt(request.getParameter("o_num"));
+		MyPageDao dao=MyPageDao.getInstance();
+		int n=dao.returnPduct(o_num);
+		response.setContentType("text/plain;charset=utf-8");
+		JSONObject json=new JSONObject();
+		json.put("n", n);
+		PrintWriter pw=response.getWriter();
+		pw.println(json.toString());
+		pw.close();		
+	}
+	
+	
 }

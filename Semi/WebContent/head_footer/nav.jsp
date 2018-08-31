@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<!-- 추가 Sidebar (최근 본 상품 5개) -->  
 <script src="js/yi_js.js?ver=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <%	String id=(String)session.getAttribute("id"); %>
    <div>
-	   <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; top:0px; width:400px;z-index: 2;" id="mySidebar">
-		  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+	   <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; top:0px; width:410px;z-index: 2;" id="mySidebar">
+		  <button onclick="w3_close()" class="w3-bar-item w3-large"><span style="float:left">최근 본 상품</span> <span style="float:right;">Close &times;</span></button>
 		  <div id="view" style="color:gray;">
 		  </div>
 	   </div>
@@ -194,7 +193,7 @@ function searchW() {
 					var pPrice = data.list[i].pPrice;
 					var pImage = data.list[i].pImage;
 					$('#testing').append('<a href="opainting.do?cmd=detail&p_num='+pNum+'">'+pName+' &nbsp&nbsp;&nbsp;&nbsp;'+pPrice+'원</a><br>');
-					$('#testing').append('<img src=painting/o/'+pImage+' style="width:180px; height:140px;"><br><br>');
+					$('#testing').append('<img src="painting/o/'+pImage+'" style="width:180px; height:140px;"><br><br>');
 				}
 			}
 		}

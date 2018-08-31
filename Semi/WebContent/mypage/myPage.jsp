@@ -110,10 +110,11 @@ ul {
 	<div class="col-md-6">
 		<table class="table table-hover" style="height:100px;">
 			<tr>
+			
 				<th><a href="mypage.do?cmd=orderlist&id=${id }"> <span
 						style="size: 50; color: black;">ORDER</span><br> <span
 						style="size: 20; color: black;">주문 내역 조회하기</span>
-				</a></th>
+				</a><input type="hidden" id="idd" value="<%=id%>"></th>
 			</tr>
 		</table>
 		<table class="table table-hover" style="height:100px;">
