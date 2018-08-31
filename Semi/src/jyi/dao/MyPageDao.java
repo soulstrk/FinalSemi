@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import ljy.db.DBConnection;
@@ -154,6 +155,8 @@ public class MyPageDao {
 				sql="select * from(select aa.*, rownum rnum, aa.o_date dd from("+ 
 						"select * from order_table where o_id=? and to_char(o_date)=? order by o_date desc)aa ) " + 
 						"where rnum >=? and rnum <=?";
+			}else if(date.equals("reviewok")) {
+				sql="select * from order_table where o_id=? and o_state between 1 and 3";
 			}
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -326,6 +329,35 @@ public class MyPageDao {
 		}
 	}
 
+	public ArrayList<Integer> getInt(ArrayList<OrderVo> list){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DBConnection.getConn();
+			String sql="select oi_p_num from order_info where oi_num=?";
+			pstmt=con.prepareStatement(sql);
+			ArrayList<Integer> list1=new ArrayList<Integer>();
+			for(OrderVo ovo:list) {
+				pstmt.setInt(1, ovo.getO_num());
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					int n=rs.getInt("oi_p_num");
+					list1.add(n);
+				}
+			}
+			return list1;		
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DBConnection.closeConn(rs, pstmt, con);
+		}
+
+
+	}
+	
+	
 	// ------------------------------------------------------------------
 	// 마이페이지 적립금 내역 불러오기
 	public ArrayList<OrderPointVo> getPointList(ArrayList<OrderVo> list) {
@@ -486,4 +518,28 @@ public class MyPageDao {
 			DBConnection.closeConn(null, pstmt, con);
 		}
 	}
+	
+	//반품하기 --> o_status =4로 바꾸기
+	public int returnPduct(int o_num) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=DBConnection.getConn();
+			String sql="update order_table set o_state=4 where o_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, o_num);
+			int n=pstmt.executeUpdate();
+			return n;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DBConnection.closeConn(null, pstmt, con);
+		}
+		
+		
+		
+	}
+	
+	
 }

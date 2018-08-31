@@ -156,7 +156,7 @@ function sendCart(){
     <div class="right_hbox" style="border-bottom: 2px solid black;height:  40px;">
         
         <div class="rtitle" name="p_name" style="  float: left;">
-        	${vo.p_name};
+        	${vo.p_name}
         </div>
    
     </div>
@@ -285,6 +285,16 @@ function sendCart(){
 	<div class="row">
 		<div class="col-md-12">
 		<% if(id != null){ %> 
+			<c:forEach var="i" items="${list1 }">
+				<c:choose>
+					<c:when test="${i== vo.p_num}">
+						<input type="hidden" id="reviewok" value="${i }">
+					</c:when>
+					<c:otherwise>
+						<input type="hidden" id="reviewok" value="-1">
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 			<input type="text" placeholder="상품후기를 입력해주세요." id="com" style="width: 400px;"><button type="button" onclick="comInsert()">입력</button>
 		<% } else{	%>
 			<input type="text" placeholder="로그인 이후에 이용 가능합니다." id="com" style="width: 400px;" disabled="disabled"><button type="button">입력</button>
@@ -338,6 +348,13 @@ function sendCart(){
 	}
 	
 	function comInsert() {
+		var reviewok=document.getElementById("reviewok");
+		if(reviewok.value == "-1"){
+			alert("구매 후 사용가능한 서비스입니다.");
+			return;
+		}
+		
+		
 		var comment = $('#com').val();
 		$.ajax({
 			url : "productComments.do?cmd=insert&comment="+comment+"&pNum=${vo.p_num}",
