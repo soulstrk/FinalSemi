@@ -12,10 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
-=======
->>>>>>> branch 'master' of https://github.com/soulstrk/FinalSemi.git
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -37,7 +34,6 @@ public class PaintingController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String cmd = request.getParameter("cmd");
 
-<<<<<<< HEAD
 		if (cmd.equals("oriental")) {
 			olist(request, response);
 
@@ -47,20 +43,10 @@ public class PaintingController extends HttpServlet {
 		}
 	}
 
-	// 동양화 list를 가지고오는 부분
-
-	private void olist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-=======
-	
-	
-	
-	
 	//동양화 list를 가지고오는 부분
 	
 	protected void olist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
->>>>>>> branch 'master' of https://github.com/soulstrk/FinalSemi.git
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
 		String spageNum = request.getParameter("pageNum");// null
@@ -117,34 +103,10 @@ public class PaintingController extends HttpServlet {
 	}
 
 	////////// 세부 정보 보기
-<<<<<<< HEAD
-
-	private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		//상품후기 추가
-		String id=(String)session.getAttribute("id");
-		MyPageDao dao1=MyPageDao.getInstance();
-		String reviewok="reviewok";
-			//주문상태가 1~3사이인 주문번호
-		ArrayList<OrderVo> list=dao1.getOrderList(id, 0, 0,reviewok, null, null); 
-			//주문번호에 해당하는 상품번호 모음
-		ArrayList<Integer> list1=dao1.getInt(list);
-		if(list!=null && list1!=null) {
-			request.setAttribute("list1", list1);
-		}
-		//상품후기 추가 끝 
-				
-				
-		String cartMsg = (String) request.getAttribute("cartMsg");
-		if (cartMsg != null) {
-=======
-	
-	
 	protected void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String cartMsg = (String)request.getAttribute("cartMsg");
 		if(cartMsg != null) {
->>>>>>> branch 'master' of https://github.com/soulstrk/FinalSemi.git
 			request.setAttribute("cartMsg", cartMsg);
 		}
 		String p_num = request.getParameter("p_num");

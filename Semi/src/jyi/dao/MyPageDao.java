@@ -107,7 +107,7 @@ public class MyPageDao {
 		try {
 			con = DBConnection.getConn();
 			con.setAutoCommit(false);
-			String sql = "update members set comments_num = -1 where id=? and pwd=?";
+			String sql = "update members set adminok = -1 where id=? and pwd=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
@@ -485,9 +485,9 @@ public class MyPageDao {
 			ArrayList<ReviewVo> list=new ArrayList<ReviewVo>();
 			while(rs.next()) {
 				int comments_num=rs.getInt("comments_num");
-				int product_num=rs.getInt("product_num");
+				int p_num=rs.getInt("p_num");
 				String content=rs.getString("content");
-				ReviewVo vo=new ReviewVo(comments_num, product_num, id, content);
+				ReviewVo vo=new ReviewVo(comments_num, p_num, id, content);
 				list.add(vo);
 			}
 			return list;

@@ -58,7 +58,7 @@
 					  <c:forEach var="pvo" items="${plist }"> <!-- 상품 정보 불러오기 -->
 					  	<c:choose>
 					  		<c:when test="${vo.c_p_num == pvo.p_num }"> 
-		<!-- 이미지    --><td><div class="thumb"><a href="#"><img src="painting/o/${pvo.p_image }" alt="상품 섬네일" id="CartImg"/></a></div></td>
+		<!-- 이미지    --><td><div class="thumb"><a href="opainting.do?cmd=detail&p_num=${pvo.p_num }"><img src="painting/o/${pvo.p_image }" alt="상품 섬네일" id="CartImg"/></a></div></td>
 		<!-- 상품제목 --><td>${pvo.p_name }</td>
 		<!-- 상품수량 --><td><form action="cart.do?cmd=update" method="post">
 						  <input type="hidden" name="c_num" value="${vo.c_num }">

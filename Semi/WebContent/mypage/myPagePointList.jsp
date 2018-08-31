@@ -26,6 +26,9 @@
 							<c:when test="${orderpointvo.o_num==ordervo.o_num }">
 								<td>${ordervo.o_date }</td>
 							</c:when>
+							<c:otherwise>
+								<td>오류</td>
+							</c:otherwise>
 						</c:choose>
 						</c:forEach>
 						<td><a href="mypage.do?cmd=orderinfo&o_num=${orderpointvo.o_num }" style="color:black;">${orderpointvo.o_num }</a></td>

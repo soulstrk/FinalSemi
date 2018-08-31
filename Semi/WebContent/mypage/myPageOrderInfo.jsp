@@ -29,7 +29,7 @@
 								<c:forEach var="list" items="${volist }">
 									<c:choose>
 									<c:when test="${vo.oi_p_num==list.p_num}">
-									<th><img src="painting/o/${list.p_image }" alt="product"></th>
+									<th><a href="opainting.do?cmd=detail&p_num=${list.p_num}"><img src="painting/o/${list.p_image }" alt="product"></a></th>
 										<th>${list.p_name }</th>
 									</c:when>
 									<c:otherwise>

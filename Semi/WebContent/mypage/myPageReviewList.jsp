@@ -20,10 +20,10 @@
 					<c:choose>
 						<c:when test="${vo ne null }">
 						<tr>
-							<td>${vo.adminOk }</td>
-							<td>${vo.product_num }</td>
+							<td>${vo.comments_num }</td>
+							<td>${vo.p_num }</td>
 							<td>${vo.content }</td>
-							<td><a href="mypage.do?cmd=reviewDelete&id=<%=id %>&adminOk=${vo.adminOk }"><span style="color:red;">[delete]</span></a></td>
+							<td><a href="mypage.do?cmd=reviewDelete&id=<%=id %>&comments_num=${vo.comments_num}"><span style="color:red;">[delete]</span></a></td>
 						</tr>
 						</c:when>
 				</c:choose>
