@@ -18,7 +18,7 @@ public class LiveSearchDao {
 		ResultSet rs = null;
 		HashMap<Integer, String> map = new HashMap<>();
 		String sql = "select * from (select oi_p_num,sum(oi_amount) sellSum from order_info group by oi_p_num order by sellSum desc) where rownum > 0 and rownum <= 10";
-		
+		//getBestProducts
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
