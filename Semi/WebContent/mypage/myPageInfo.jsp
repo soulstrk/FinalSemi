@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<th><label for="pwd">PASSWORD</label></th>
-				<td><input type="text" id="pwd" value="${vo.pwd }" disabled="disabled">
+				<td><input type="password" id="pwd" value="${vo.pwd }" disabled="disabled">
 				</td>
 			</tr>
 			<tr>

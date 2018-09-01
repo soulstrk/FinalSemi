@@ -72,8 +72,9 @@ public class MyPageController extends HttpServlet {
 		if (id.equals("null") || id.equals("")) {
 			request.setAttribute("resultMsg", "로그인 후 이용가능한 페이지입니다.");
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
-			return;
-		}
+				return;
+		}else {
+		
 		MyPageDao dao = MyPageDao.getInstance();
 		MembersVo vo = dao.getInfo(id);
 		if (vo == null) {
@@ -128,7 +129,7 @@ public class MyPageController extends HttpServlet {
 		request.setAttribute("vo", vo);
 		request.getRequestDispatcher("index.jsp?content1=mypage/" + path).forward(request, response);
 		}
-	
+	}
 
 	// 마이페이지 회원정보 수정하기
 	protected void update(HttpServletRequest request, HttpServletResponse response)
@@ -239,9 +240,6 @@ public class MyPageController extends HttpServlet {
 		int o_num = Integer.parseInt(request.getParameter("o_num"));
 		MyPageDao dao = MyPageDao.getInstance();
 		ArrayList<Integer> list = dao.getProductNum(o_num); // 주문한 상품번호배열 불러오기
-		for(Integer i:list) {
-			System.out.println(i +"???");
-		}
 		ArrayList<ProductsVo> voList = dao.getOrderInfo(list);// 주문상품별 정보 불러오기
 		OrderInfoVo vo = dao.getOrderProductInfo(o_num);// 주문정보 불러오기(상품번호,해당 수량, 지불금액)
 		if (list == null || voList == null || vo == null) {

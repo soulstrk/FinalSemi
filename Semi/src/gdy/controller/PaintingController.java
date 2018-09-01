@@ -42,6 +42,7 @@ public class PaintingController extends HttpServlet {
 
 		}
 	}
+
 	//동양화 list를 가지고오는 부분
 	
 	protected void olist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -102,8 +103,6 @@ public class PaintingController extends HttpServlet {
 	}
 
 	////////// 세부 정보 보기
-	
-	
 	protected void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String cartMsg = (String)request.getAttribute("cartMsg");

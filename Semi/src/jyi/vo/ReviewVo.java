@@ -2,7 +2,7 @@ package jyi.vo;
 
 public class ReviewVo {
 	  private int comments_num; //글번호
-	  private int product_num; //상품번호    
+	  private int p_num; //상품번호    
 	  private String id; //아이디           
 	  private String content; //상품후기내용
 	  
@@ -10,10 +10,10 @@ public class ReviewVo {
 		super();
 	}
 
-	public ReviewVo(int comments_num, int product_num, String id, String content) {
+	public ReviewVo(int comments_num, int p_num, String id, String content) {
 		super();
 		this.comments_num = comments_num;
-		this.product_num = product_num;
+		this.p_num = p_num;
 		this.id = id;
 		this.content = content;
 	}
@@ -26,12 +26,12 @@ public class ReviewVo {
 		this.comments_num = comments_num;
 	}
 
-	public int getProduct_num() {
-		return product_num;
+	public int getP_num() {
+		return p_num;
 	}
 
-	public void setProduct_num(int product_num) {
-		this.product_num = product_num;
+	public void setP_num(int p_num) {
+		this.p_num = p_num;
 	}
 
 	public String getId() {
@@ -52,8 +52,8 @@ public class ReviewVo {
 
 	@Override
 	public String toString() {
-		return "ReviewVo [comments_num=" + comments_num + ", product_num=" + product_num + ", id=" + id + ", content="
-				+ content + "]";
+		return "ReviewVo [comments_num=" + comments_num + ", p_num=" + p_num + ", id=" + id + ", content=" + content
+				+ "]";
 	}
 
 	

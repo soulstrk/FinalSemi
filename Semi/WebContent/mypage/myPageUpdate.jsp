@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<script src="js/jy_join.js?ver=4"></script>
+	<script src="js/jy_join.js?ver=6"></script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <title>MYPAGE</title>
 <style>
@@ -92,24 +92,24 @@ function getSubmit(){
 	var img1=document.getElementById("img1");
 	var img2=document.getElementById("img2");
 	var img3=document.getElementById("img3");
-	//alert(img1.src);
-	if(!(img1.src=="http://localhost:8081/Semi/images/success.png")){
+	if(!(img1.src=="http://localhost:8081/images/success.png")){
 		alert("수정할 비밀번호를 입력해주세요");
 		return false;
 	}
-	if(!(img2.src=="http://localhost:8081/Semi/images/success.png")){
+	if(!(img2.src=="http://localhost:8081/images/success.png")){
 		alert("새 비밀번호 확인을 진행해주세요");
 		return false;
 	}
 	var email1=document.getElementById("email1");
 	var email_select=document.getElementById("email_select"); 
+	var email2=document.getElementById("email2");
 	var val="";
-	if(email1.value==val || email_select.value==val){
+	if(email1.value==val || email2.value==val){
 		alert("수정할 이메일을 입력해주세요");
 		email1.focus();
 		return false;
 	}
-	if(!(img3.src=="http://localhost:8081/Semi/images/success.png")){ 
+	if(!(img3.src=="http://localhost:8081/images/success.png")){  
 		alert("수정할 연락처를 입력해주세요");
 		return false;
 	}
