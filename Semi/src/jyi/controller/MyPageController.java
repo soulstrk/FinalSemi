@@ -186,13 +186,16 @@ public class MyPageController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String date = request.getParameter("date");
-		if (date == null || date.equals("null")) date = "x";
+		if (date == null || date.equals("null")) {
+			date = "x";
+		}
 		Calendar cal = Calendar.getInstance();
 		int month = cal.get(Calendar.MONTH) + 1;
 		String startDate = "1900/01/01";
 		String z = "";
-		if (month < 10)
+		if (month < 10) {
 			z = "0";
+		}
 		String endDate = String.valueOf(cal.get(Calendar.YEAR)) + "-" + z + String.valueOf(month) + "-"
 				+ String.valueOf(cal.get(Calendar.DATE));
 		if (date.equals("date")) {
@@ -201,7 +204,12 @@ public class MyPageController extends HttpServlet {
 		}
 		// 2018-08-23 --> '18/08/23'
 		String sd = startDate.substring(2, 4) + "/" + startDate.substring(5, 7) + "/" + startDate.substring(8, 10);
-		String ed = endDate.substring(2, 4) + "/" + endDate.substring(5, 7) + "/" + endDate.substring(8, 10);
+		String ed = "";
+		if(endDate.length() < 10 ) {
+			ed=endDate.substring(2, 4) + "/" + endDate.substring(5, 7) + "/" +"0"+endDate.charAt(8);
+		}else {
+			ed=endDate.substring(2, 4) + "/" + endDate.substring(5, 7) + "/" + endDate.substring(8, 10);
+		}
 		String spageNum = request.getParameter("pageNum");
 		int pageNum = 1;
 		if (spageNum != null)

@@ -157,16 +157,25 @@ function getDate(e){
 	var z="";
 	var x="";
 	if(e=="btn1"){ //오늘
-		if((d.getMonth()+1) < 10){
-			z="0";
+		var nowmonth=d.getMonth()+1;
+		if(nowmonth <10) z="0";
+		var gd=d.getDate();	
+		if(gd<10){
+			x="0";
 		}
-		date1.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
-		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
+		date1.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+x+d.getDate();
+		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+x+d.getDate();
 	}else if(e=="btn2"){ //1주일
-		if((d.getMonth()+1) <10) z="0";
+		var nowmonth=(d.getMonth()+1);
+		if(nowmonth <10) z="0";
+		var gd=d.getDate();	
+		var x="";
+		if(gd<10){
+			x="0";
+		}
 		var d1=new Date(d.getFullYear(),d.getMonth()+1,d.getDate()-7);
 		date1.value=d1.getFullYear()+"-"+z+(d1.getMonth())+"-"+(d1.getDate());
-		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+d.getDate();
+		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+s+d.getDate();
 	}else if(e=="btn3"){ //1개월
 		var nowmonth=(d.getMonth()+1);
 		if(nowmonth <10) z="0";
