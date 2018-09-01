@@ -12,7 +12,7 @@ public class DBConnection {
 		Connection conn=null;
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
-			String url="jdbc:oracle:thin:@localhost:1521:xe"; //orcl-> xe
+			String url="jdbc:oracle:thin:@61.102.155.40:1521:xe"; //orcl-> xe
 			conn=DriverManager.getConnection(url, "scott","tiger"); ///scott, tiger //yong, admin
 		}catch(ClassNotFoundException ce) {
 			System.out.println(ce.getMessage());

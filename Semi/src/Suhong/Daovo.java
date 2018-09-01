@@ -97,7 +97,6 @@ public class Daovo {
 			rs=pst.executeQuery();
 			ArrayList<Vojap> list=new ArrayList<>();
 			while(rs.next()) {
-				System.out.println("여기들오나");
 				int num=rs.getInt("num");
 				String name=rs.getString("name");
 				String title=rs.getString("title");
@@ -111,7 +110,6 @@ public class Daovo {
 			return list;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
-			System.out.println("여긴가요");
 			return null;
 		}finally {
 			DBConnection.closeConn(rs,pst,con);

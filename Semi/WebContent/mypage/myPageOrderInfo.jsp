@@ -3,12 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<style>
+ th{
+ 	text-align: center;
+ 	vertical-align: center;
+ }
+</style>
 <title>MYPAGE</title>
 <div class="container"  style="margin-bottom: 600px;">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
 		<div>
 		<h3>주문 상품 정보</h3>
 		</div>
@@ -43,6 +48,6 @@
 						</thead>
 			</table>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 </div>

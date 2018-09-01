@@ -169,13 +169,12 @@ function getDate(e){
 		var nowmonth=(d.getMonth()+1);
 		if(nowmonth <10) z="0";
 		var gd=d.getDate();	
-		var x="";
 		if(gd<10){
 			x="0";
 		}
 		var d1=new Date(d.getFullYear(),d.getMonth()+1,d.getDate()-7);
 		date1.value=d1.getFullYear()+"-"+z+(d1.getMonth())+"-"+(d1.getDate());
-		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+s+d.getDate();
+		date2.value=d.getFullYear()+"-"+z+(d.getMonth()+1)+"-"+x+d.getDate();
 	}else if(e=="btn3"){ //1개월
 		var nowmonth=(d.getMonth()+1);
 		if(nowmonth <10) z="0";

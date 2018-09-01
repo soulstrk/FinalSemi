@@ -18,7 +18,7 @@
 </div>
 <c:if test="${empty list }">
 	<script type="text/javascript">
-		location.href="listo.do";
+		//location.href="listo.do";
 	</script>
 </c:if>
 <div id="content">
