@@ -85,7 +85,7 @@
 					</c:choose>
 					</td>
 					<td id="list">${vo.pDiscountRate }%</td>
-					<td id="list"><a href="#">사러가기</a></td>
+					<td id="list"><a href="opainting.do?cmd=detail&p_num=${vo.pNum }">사러가기</a></td>
 				</tr>
 				</c:forEach>
 			</table>

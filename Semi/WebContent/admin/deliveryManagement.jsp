@@ -60,6 +60,9 @@
 			<c:if test="${vo.oState eq 2 }">
 				배송 중
 			</c:if>
+			<c:if test="${vo.oState eq 3 }">
+				배송 완료
+			</c:if>
 			</td>
 			<c:if test="${empty finalMsg }">
 			<td>

@@ -16,14 +16,14 @@
    </div>
    
   <!-- 헤더부분 -->
-  <nav class="navbar navbar-expand-lg navbar-white" style="height: 90px;">
+  <nav class="navbar navbar-expand-lg navbar-white" style="height: 110px;">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02">
 	   <span class="navbar-toggler-icon"></span>
 	</button>
   	
   <!-- 메뉴창들 -->
   <div class="collapse navbar-collapse" id="navbarColor02">
-    <ul class="navbar-nav" style="margin-left: 300px;">
+    <ul class="navbar-nav" style="margin-left: 300px; height: 100px;">
 	  <li class="nav-item active">
       	<i class="fa fa-home w3-xxxlarge"></i>
       </li>

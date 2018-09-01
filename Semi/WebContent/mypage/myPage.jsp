@@ -161,7 +161,7 @@ ul {
 		</table>
 		<table class="table table-hover" style="height:100px;">
 			<tr>
-				<th><a href=""> <span
+				<th><a href="list.jsp"> <span
 						style="size: 50; color: black;">Community</span><br> <span
 						style="size: 20; color: black;">자유게시판</span>
 				</a></th>

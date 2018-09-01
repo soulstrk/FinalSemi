@@ -94,7 +94,8 @@ public class MemberController extends HttpServlet{
 		String pwd = request.getParameter("pwd");
 		HttpSession session = request.getSession();
 		MembersVo vo = dao.loginChk(id, pwd);
-		if(vo != null) {
+		
+		if(vo != null && vo.getAdminok() != -1) {
 			session.setAttribute("vo", vo);
 			session.setAttribute("loginMsg", "로그인 성공!");
 			session.setAttribute("id", id);
