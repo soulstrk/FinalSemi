@@ -34,6 +34,10 @@ $(document).ready(function() {
 	location.href = "mainList.do";
 })
 </script>
+
+
+
+
 </c:if>
 <c:if test="${!empty findId }"><script type="text/javascript">
 alert('찾으신 아이디는 : ${findId} 입니다');

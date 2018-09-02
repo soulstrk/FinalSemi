@@ -31,7 +31,7 @@ public class PaintingDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, p_num);
 			rs= pstmt.executeQuery();
-			
+			System.out.println("getdetail");
 			if(rs.next()) {
 				
 				

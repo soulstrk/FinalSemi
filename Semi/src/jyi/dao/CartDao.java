@@ -34,6 +34,7 @@ public class CartDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
+			System.out.println("getCart");
 			ArrayList<CartVo> list = new ArrayList<CartVo>();
 			while (rs.next()) {
 				int c_num = rs.getInt("c_num");
@@ -220,6 +221,7 @@ public class CartDao {
 			ps.setString(2, id);
 			ps.setString(3, pNum);
 			int w = ps.executeUpdate();
+			System.out.println("update");
 			return w;
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
