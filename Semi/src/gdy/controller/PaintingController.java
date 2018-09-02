@@ -25,6 +25,7 @@ import jyi.dao.CartDao;
 import jyi.dao.MyPageDao;
 import jyi.vo.CartVo;
 import jyi.vo.OrderVo;
+import jyi.vo.ProductsVo;
 import jyi.vo.ViewsVo;
 import ljy.dao.ProductCommentsDao;
 import ljy.vo.ReviewVo;
@@ -129,7 +130,8 @@ public class PaintingController extends HttpServlet {
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		MyPageDao dao1=MyPageDao.getInstance();
-		ArrayList<OrderVo> list1=dao1.getOrderList(id, 0, 0, "x", null, null);
+		ArrayList<OrderVo> list0=dao1.getOrderList(id, 0, 0, "x", null, null);
+		ArrayList<Integer> list1=dao1.getInt(list0);
 		request.setAttribute("list1",list1);
 		//Ãß°¡³¡
 		

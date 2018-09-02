@@ -287,8 +287,8 @@ function sendCart(){
 		<% if(id != null){ %> 
 			<c:forEach var="v" items="${list1 }">
 				<c:choose>
-					<c:when test="${v.p_num== vo.p_num}">
-						<input type="hidden" id="reviewok" value="${v.p_num }">
+					<c:when test="${v.oi_p_num== vo.p_num}">
+						<input type="hidden" id="reviewok" value="${v.oi_p_num }">
 					</c:when>
 					<c:otherwise>
 						<input type="hidden" id="reviewok" value="-1">
