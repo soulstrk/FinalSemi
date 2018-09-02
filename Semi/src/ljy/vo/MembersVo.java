@@ -2,7 +2,7 @@ package ljy.vo;
 
 import java.util.Date;
 
-//회원 
+///회원 
 public class MembersVo {
 
  // 아이디 
