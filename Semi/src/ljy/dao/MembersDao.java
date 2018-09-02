@@ -104,6 +104,7 @@ public class MembersDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "delete from members where id = ?";
+		updateKickMember(id);
 		try {
 			conn = DBConnection.getConn();
 			ps = conn.prepareStatement(sql);
@@ -112,6 +113,24 @@ public class MembersDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("memberDupli오류");
+			return -1;
+		} finally {
+			DBConnection.closeConn(null, ps, conn);
+		}
+	}
+	
+	public int updateKickMember(String id) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "update members set adminok = -1 where id = ?";
+		try {
+			conn = DBConnection.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("updateKickMember오류");
 			return -1;
 		} finally {
 			DBConnection.closeConn(null, ps, conn);

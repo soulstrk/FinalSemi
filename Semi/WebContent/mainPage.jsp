@@ -10,6 +10,10 @@
 	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
+
+
+
+
 }
 .hover01 figure:hover img {
 	-webkit-transform: scale(1.15);
@@ -100,9 +104,9 @@ alert('찾으신 아이디는 : ${findId} 입니다');
           	 <c:forEach var="vo" items="${list }" varStatus="status">
           	  <div class="col">
                <div class="card" style="width: 310px; margin-bottom: 30px; height: 550px;">
-                <a class="hover01 column" style="z-index: 1" href="opainting.do?cmd=detail&p_num=${vo.pNum }"><figure><img class="card-img-top" src="pImages/${vo.pImage }" alt="test"></figure></a>
+                <a class="hover01 column" style="z-index: 1" href="opainting.do?cmd=detail&p_num=${vo.pNum }"><figure><img class="card-img-top" src="painting/o/${vo.pImage }" alt="test"></figure></a>
                   <a class="card-img-overlay">
-				    <span class="best" style="display: block;">Best${status.index+1 }</span>
+				    <span class="best" style="display: block;z-index: 1;">Best${status.index+1 }</span>
 				  </a>
 				  <div class="card-footer" style="background-color: white;">
 				  	<ul>
@@ -150,9 +154,9 @@ alert('찾으신 아이디는 : ${findId} 입니다');
           	 <c:forEach var="vo" items="${saleList }" varStatus="status">
           	  <div class="col">
                <div class="card" style="width: 310px; margin-bottom: 30px; height: 550px;">
-                <a class="hover01 column" style="z-index: 1" href="opainting.do?cmd=detail&p_num=${vo.pNum }"><figure><img class="card-img-top" src="pImages/${vo.pImage }" alt="test"></figure></a>
+                <a class="hover01 column" style="z-index: 1" href="opainting.do?cmd=detail&p_num=${vo.pNum }"><figure><img class="card-img-top" src="painting/o/${vo.pImage }" alt="test"></figure></a>
                   <a class="card-img-overlay" href="opainting.do?cmd=detail&p_num=${vo.pNum }">
-				    <span class="best" style="display: block;">${vo.pDiscountRate }%</span>
+				    <span class="best" style="display: block;z-index: 1;">${vo.pDiscountRate }%</span>
 				  </a>
 				  <div class="card-footer" style="background-color: white;">
 				  	<ul>

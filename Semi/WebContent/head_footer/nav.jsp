@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<!-- 추가 Sidebar (최근 본 상품 5개) -->  
 <script src="js/yi_js.js?ver=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <%	String id=(String)session.getAttribute("id"); %>
    <div>
-	   <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; top:0px; width:700px;" id="mySidebar">
-		  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+	   <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; top:0px; width:410px;z-index: 2;" id="mySidebar">
+		  <button onclick="w3_close()" class="w3-bar-item w3-large"><span style="float:left">최근 본 상품</span> <span style="float:right;">Close &times;</span></button>
 		  <div id="view" style="color:gray;">
 		  </div>
 	   </div>
@@ -17,14 +16,14 @@
    </div>
    
   <!-- 헤더부분 -->
-  <nav class="navbar navbar-expand-lg navbar-white" style="height: 90px;">
+  <nav class="navbar navbar-expand-lg navbar-white" style="height: 110px;">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02">
 	   <span class="navbar-toggler-icon"></span>
 	</button>
   	
   <!-- 메뉴창들 -->
   <div class="collapse navbar-collapse" id="navbarColor02">
-    <ul class="navbar-nav" style="margin-left: 300px;">
+    <ul class="navbar-nav" style="margin-left: 300px; height: 100px;">
 	  <li class="nav-item active">
       	<i class="fa fa-home w3-xxxlarge"></i>
       </li>
@@ -74,14 +73,16 @@
 			    <a class="dropdown-item" href="admin.do?adminNum=1&num=0">회원관리</a>
 			    <a class="dropdown-item" href="index.jsp?content1=admin/productEnroll.jsp">상품등록</a>
 			    <a class="dropdown-item" href="adminProduct.do?adminNum=3&pageNum=1">상품관리</a>
+			    <a class="dropdown-item" href="deliveryManagement.do?cmd=delivering">배송관리</a>
 			  </div>
 			</div>
 			<script type="text/javascript">
 				$(document).ready(function() {
-					 $('#searchForm').css('left','655px'); 
+					 $('#searchForm').css('left','455px'); 
 					 $('img[src="images/hd_logo.png"]').css('left','150px'); 
-					 $('#myPage').css('left','580px');
-					 $('#live').css('left','410px');
+					 $('#myPage').css('left','380px');
+					 $('.live').css('left','60px');
+					 $('#testing').css('left','170px')
 				})
 			</script>
 		<%
@@ -93,23 +94,23 @@
       <li class="nav-item active">
         <a class="navbar-brand" href="../mainList.do"><img src="images/hd_logo.png" style="width: 223px; height: 45px; position: relative; left: 250px; padding-bottom: 0px;"></a>
       </li>
-      <li class="nav-item active" style="position: relative; left: 350px; width: 120px;" id="live">
+      <li class="nav-item active" style="position: relative; left: 350px; width: 150px;" class="live">
         <a class="navbar-brand" href="#"><img alt="" src="" class="rounded-circle" id="liveImage" style="width: 90px; height: 90px;"></a>
       </li>
-      <li class="nav-item active" style="position: relative; left: 350px; width: 120px;" id="live">
+      <li class="nav-item active" style="position: relative; left: 350px; width: 150px;" class="live">
         <span id="liveSpan"></span>
       </li>
       <li class="nav-item active" id="myPage">
         <a class="nav-link" href="mypage.do?cmd=info&id=<%=id%>&info=mypage&date=x&date1=0&date2=0"><b>My page</b></a>
       </li>
       <li class="nav-item active">
-        <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 555px;" method="post" action="search.do?pageNum=1">
+        <form class="form-inline my-2 my-lg-2" id="searchForm"style="position: relative; left: 505px;" method="post" action="search.do?pageNum=1">
 	      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" id="searchP" onkeyup="searchW()" autocomplete=off>
 	      <button class="btn" type="submit"><img src="images/magnifier.png"></button>
 	    </form>
       </li>
     </ul>
-    <div style="background-color:white; color: black; border: 1px solid; position: relative; left: 500px; top:280px; width: 240px; z-index: 1; height: 500px; display: none; overflow: scroll; font-family: 'Nanum Gothic', serif; font-weight: bold;" id="testing"></div>
+    <div style="background-color:white; color: black; border: 1px solid; position: relative; left: 270px; top:280px; width: 240px; z-index: 1; height: 500px; display: none; overflow: scroll; font-family: 'Nanum Gothic', serif; font-weight: bold;" id="testing"></div>
   </div>
 </nav>
 
@@ -156,12 +157,12 @@ setInterval(function() {
 			dataType : 'json',
 			Type : 'post',
 			success: function(data) {
-					cnt = cnt % 3;
+					cnt = cnt % data.liveList.length;
 					var pNum = data.liveList[cnt].pNum;
 					var pImage = data.liveList[cnt].pImage;
 					var pName = data.liveList[cnt].pName;
-					$('#liveImage').attr('src','pImages/'+pImage);
-					$('#liveSpan').html('<h3>'+(cnt+1)+'</h3><a href="opainting.do?cmd=detail&p_num='+pNum+'" style="font-size:25px;">'+pName+'</a>');
+					$('#liveImage').attr('src','painting/o/'+pImage);
+					$('#liveSpan').html('<h3>'+(cnt+1)+'위</h3><a href="opainting.do?cmd=detail&p_num='+pNum+'" style="font-size:25px;">'+pName+'</a>');
 					cnt++;
 				}
 			});

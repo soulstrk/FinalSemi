@@ -274,7 +274,7 @@ public class CartDao {
 				con.commit();
 				return n1;
 			} else { // 새로본 페이지(스텝번호 -1 지우고 새 row생성)
-				sql = "insert into views values(view_seq.nextval,?,?,4)";
+				sql = "insert into views values(views_seq.nextval,?,?,4)";
 				pstmt4 = con.prepareStatement(sql);
 				pstmt4.setString(1, vo.getId());
 				pstmt4.setInt(2, vo.getP_num());

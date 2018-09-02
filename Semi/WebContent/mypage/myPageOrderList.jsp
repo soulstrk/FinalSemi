@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<script src="js/yi_js.js?ver=5" ></script>
+<script src="js/yi_js.js?ver=7" ></script>
 
 <title>MYPAGE</title>
 <%	String id = (String) session.getAttribute("id");  %>
@@ -38,7 +38,7 @@
 				<tr>
 					<td>DATE[주문번호]</td>
 					<td>PRICE</td>
-					<td>STATE</td>
+					<td>STATE[반품신청시 클릭하세요]</td>
 				</tr>
 				<c:forEach var="vo" items="${list }">
 				<tr>
@@ -46,22 +46,22 @@
 					<td>${vo.o_payment }</td>
 					<c:choose>
 						<c:when test="${vo.o_state eq -1}">
-							<td>[주문취소]</td>
+							<td><a href="javascript:returnPduct('${vo.o_num}')" id="${vo.o_num}">[주문취소]</a></td>
 						</c:when>
 						<c:when test="${vo.o_state eq 1}">
-							<td>[배송준비중]</td>
+							<td><a href="javascript:returnPduct('${vo.o_num}')" id="${vo.o_num}">[배송준비중]</a></td>
 						</c:when>
 						<c:when test="${vo.o_state eq 2}">
-							<td>[배송중]</td>
+							<td><a href="javascript:returnPduct('${vo.o_num}')" id="${vo.o_num}">[배송중]</a></td>
 						</c:when>
 						<c:when test="${vo.o_state eq 3}">
-							<td>[배송완료]</td>
+							<td><a href="javascript:returnPduct('${vo.o_num}')" id="${vo.o_num}">[배송완료]</a></td>
 						</c:when>
 						<c:when test="${vo.o_state eq 4}">
-							<td>[반품신청중]</td>
+							<td><a href="javascript:returnPduct('${vo.o_num}')" id="${vo.o_num}">[반품신청중]</a></td>
 						</c:when>
 						<c:when test="${vo.o_state eq 5}">
-							<td>[반품승인완료]</td>
+							<td><a href="javascript:returnPduct('${vo.o_num}')" id="${vo.o_num}">[반품승인완료]</a></td>
 						</c:when>
 					</c:choose>
 				</tr>

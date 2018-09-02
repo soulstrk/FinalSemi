@@ -73,8 +73,8 @@ public class CustomerBoardController extends HttpServlet {
 		if(list==null) {
 			request.setAttribute("resultMsg","오류로 인해 해당 정보를 불러들이지 못했습니다..." );
 			request.getRequestDispatcher("index.jsp?content1=result.jsp").forward(request, response);
+			return;
 		}
-		
 		int pageCount=(int)Math.ceil(dao.getCountNum()/10.0);
 		int startPage=((pageNum-1)/10*10)+1;
 		int endPage=startPage+9;

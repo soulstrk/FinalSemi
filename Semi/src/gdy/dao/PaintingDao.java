@@ -132,7 +132,6 @@ public class PaintingDao {
 		try {
 			
 			if(search == "" || keyword == "" || search == null || keyword == null) {
-				System.out.println("if¹®½ÇÇà");
 				String sql =
 						
 						"select *from"+

@@ -2,7 +2,7 @@
  * 
  */
 
-var regxId = /^[a-zA-Z0-9]{8,12}$/; // 아이디 8~12자 입력, 영대소문자 와 숫자
+var regxId = /^[a-zA-Z0-9]{8,12}$/;
 var regxPwd = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
 var regxPhone = /^[0-9]{10,11}$/; //핸드폰번호 정규식
 var regxName = /^[가-힣]{2,4}$/; // 이름 정규식 (한글,2~4글자)
@@ -13,9 +13,9 @@ var regxEmail = /^[a-zA-Z0-9]{2,10}$/; //이메일 아이디부분
 
 function idLiveCheck() { //아이디 유효성 실시간 체크
 	var img = document.getElementById('img_id');
-	var id = document.getElementById('id').value; //입력된 아이디 값
-	var bool = regxId.test(id);
-	if(id == ""){
+	var ide = document.getElementById('ide').value; //입력된 아이디 값
+	var bool = regxId.test(ide);
+	if(ide == ""){
 		img.style.display = "none";
 		$('#idcheck_btn').attr('disabled',true);
 		return;
@@ -208,7 +208,7 @@ function finalCheck() {
 
 
 function dupliChk() {
-	var id = $('#id').val();
+	var id = $('#ide').val();
 	$.ajax({
 		url : "members.do?number=2&id="+id,
 		dataType : "json",
@@ -349,6 +349,9 @@ function getPhone(){
 	img3.src="images/cancel.png";
 	phone.focus();
 }
+
+
+
 
 
 
