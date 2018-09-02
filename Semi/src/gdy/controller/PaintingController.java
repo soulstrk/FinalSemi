@@ -21,8 +21,11 @@ import com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator;
 
 import gdy.dao.PaintingDao;
 import gdy.vo.PaintingVo;
+import jyi.dao.CartDao;
 import jyi.dao.MyPageDao;
+import jyi.vo.CartVo;
 import jyi.vo.OrderVo;
+import jyi.vo.ViewsVo;
 import ljy.dao.ProductCommentsDao;
 import ljy.vo.ReviewVo;
 
@@ -120,6 +123,16 @@ public class PaintingController extends HttpServlet {
 		 * 
 		 * request.setAttribute("cList", cList);
 		 */
+		
+		
+		//추가-list1
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		MyPageDao dao1=MyPageDao.getInstance();
+		ArrayList<OrderVo> list1=dao1.getOrderList(id, 0, 0, "x", null, null);
+		request.setAttribute("list1",list1);
+		//추가끝
+		
 		request.setAttribute("vo", vo);
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?content1=detailpage.jsp");
 		rd.forward(request, response);

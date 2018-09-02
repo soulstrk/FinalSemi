@@ -285,16 +285,17 @@ function sendCart(){
 	<div class="row">
 		<div class="col-md-12">
 		<% if(id != null){ %> 
-			<c:forEach var="i" items="${list1 }">
+			<c:forEach var="v" items="${list1 }">
 				<c:choose>
-					<c:when test="${i== vo.p_num}">
-						<input type="hidden" id="reviewok" value="${i }">
+					<c:when test="${v.p_num== vo.p_num}">
+						<input type="hidden" id="reviewok" value="${v.p_num }">
 					</c:when>
 					<c:otherwise>
 						<input type="hidden" id="reviewok" value="-1">
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
+			
 			<input type="text" placeholder="상품후기를 입력해주세요." id="com" style="width: 400px;"><button type="button" onclick="comInsert()">입력</button>
 		<% } else{	%>
 			<input type="text" placeholder="로그인 이후에 이용 가능합니다." id="com" style="width: 400px;" disabled="disabled"><button type="button">입력</button>

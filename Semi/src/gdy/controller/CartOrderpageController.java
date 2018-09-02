@@ -110,8 +110,8 @@ public class CartOrderpageController extends HttpServlet{
 				}
 				
 				plus_point =  (int)plus_point1;
-				System.out.println("각각 포인트" +plus_points[0]+plus_points[1]);
-				System.out.println("총 포인트"+plus_point);
+		//		System.out.println("각각 포인트" +plus_points[0]+plus_points[1]);
+		//		System.out.println("총 포인트"+plus_point);
 		
 			
 		
@@ -165,7 +165,7 @@ public class CartOrderpageController extends HttpServlet{
 			request.setAttribute("msg", msg);
 			request.getRequestDispatcher("index.jsp?content1=mainPage.jsp").forward(request, response);*/
 			String msg ="상품을 구입했습니다.";
-			request.setAttribute("msg", "msg");
+			request.setAttribute("msg", msg);
 			request.getRequestDispatcher("index.jsp?content1=msg.jsp").forward(request, response);
 			
 		}

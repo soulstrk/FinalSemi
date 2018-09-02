@@ -12,8 +12,8 @@
 <title>MYPAGE</title>
 <div class="container"  style="margin-bottom: 600px;">
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
+		<!--  <div class="col-md-1"></div>-->
+		<div class="col-md-12">
 		<div>
 		<h3>주문 상품 정보</h3>
 		</div>
@@ -48,6 +48,6 @@
 						</thead>
 			</table>
 		</div>
-		<div class="col-md-1"></div>
+		<!--  <div class="col-md-1"></div>-->
 	</div>
 </div>

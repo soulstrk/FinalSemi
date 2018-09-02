@@ -36,7 +36,6 @@
 		<div class="col-md-8">
 			<div class="table-cart table-fill-prd">
 				<table summary="번호, 사진, 제품명, 수량, 적립, 가격, 배송비, 취소">
-<<<<<<< HEAD
 					<caption>장바구니 담긴 상품</caption>
 					<colgroup>
 						<col width="40" />
@@ -106,8 +105,8 @@
 							</tr>
 						</c:forEach>
 					</tbody>
-=======
-				<caption>장바구니 담긴 상품</caption>
+
+			<%-- 	<caption>장바구니 담긴 상품</caption>
 				<colgroup>
 					<col width="40" />
 					<col width="300" />
@@ -149,7 +148,7 @@
 					</tr>
 				</c:forEach>
 				</tbody>
->>>>>>> branch 'master' of https://github.com/soulstrk/FinalSemi.git
+ --%>
 				</table>
 
 				<%
